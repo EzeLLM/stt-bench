@@ -1,0 +1,145 @@
+{
+  "_id": "6ab1ca736673a471cd536c1e",
+  "id": "moondream/parakeet-ultra",
+  "private": false,
+  "pipeline_tag": "automatic-speech-recognition",
+  "tags": [
+    "safetensors",
+    "parakeet_tdt",
+    "parakeet",
+    "tdt",
+    "speech-recognition",
+    "automatic-speech-recognition",
+    "en",
+    "de",
+    "fr",
+    "es",
+    "it",
+    "pt",
+    "ru",
+    "uk",
+    "hr",
+    "sl",
+    "lv",
+    "lt",
+    "et",
+    "fi",
+    "sv",
+    "da",
+    "nl",
+    "pl",
+    "cs",
+    "sk",
+    "hu",
+    "ro",
+    "bg",
+    "el",
+    "mt",
+    "license:cc-by-4.0",
+    "eval-results",
+    "region:us"
+  ],
+  "downloads": 29666,
+  "likes": 101,
+  "modelId": "moondream/parakeet-ultra",
+  "author": "moondream",
+  "sha": "73175eb7aeb0d82f1e2a6b53b3aabc10a90bcd0b",
+  "lastModified": "2026-09-23T00:03:54.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": null,
+  "config": {
+    "architectures": [
+      "ParakeetForTDT"
+    ],
+    "model_type": "parakeet_tdt"
+  },
+  "cardData": {
+    "license": "cc-by-4.0",
+    "language": [
+      "en",
+      "de",
+      "fr",
+      "es",
+      "it",
+      "pt",
+      "ru",
+      "uk",
+      "hr",
+      "sl",
+      "lv",
+      "lt",
+      "et",
+      "fi",
+      "sv",
+      "da",
+      "nl",
+      "pl",
+      "cs",
+      "sk",
+      "hu",
+      "ro",
+      "bg",
+      "el",
+      "mt"
+    ],
+    "pipeline_tag": "automatic-speech-recognition",
+    "tags": [
+      "parakeet",
+      "tdt",
+      "speech-recognition"
+    ]
+  },
+  "siblings": [
+    {
+      "rfilename": ".eval_results/open_asr_leaderboard.yaml",
+      "blobId": "bd2fe16ac64926b501ba4fb7bf552f8406e4e08a",
+      "size": 2541
+    },
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "size": 1519
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "49f32500718782702319da0b0c6edea910d26497",
+      "size": 6433
+    },
+    {
+      "rfilename": "config.json",
+      "blobId": "969c65410a736e4a3922f968b3481b2418aba786",
+      "size": 1153
+    },
+    {
+      "rfilename": "model.safetensors",
+      "blobId": "cdb2b9d5aaee9e4559e9cccc38c098bda565e879",
+      "size": 1255353386,
+      "lfs": {
+        "sha256": "c9608f36d0ab956c14bfcc525479b0746b3b42a56f6949ec85c14eb7466717dc",
+        "size": 1255353386,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "tokenizer.json",
+      "blobId": "a10a554cf61e38108756650018d5781ae9675c1d",
+      "size": 1159960
+    }
+  ],
+  "spaces": [
+    "mrfakename/parakeet-redux-webgpu",
+    "hugging-apps/parakeet-ultra-demo",
+    "eustlb/asr-models-on-the-hub",
+    "justinsomerville/parakeet-redux-webgpu"
+  ],
+  "createdAt": "2026-09-22T00:23:15.000Z",
+  "safetensors": {
+    "parameters": {
+      "F32": 366086,
+      "F16": 626904577
+    },
+    "total": 627270663
+  },
+  "usedStorage": 1255353386
+}

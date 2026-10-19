@@ -1,0 +1,227 @@
+{
+  "_id": "69798100a4e37b8a8fc8fc55",
+  "id": "Qwen/Qwen3-ASR-1.7B",
+  "private": false,
+  "pipeline_tag": "automatic-speech-recognition",
+  "tags": [
+    "safetensors",
+    "qwen3_asr",
+    "automatic-speech-recognition",
+    "arxiv:2601.21337",
+    "license:apache-2.0",
+    "eval-results",
+    "deploy:sagemaker",
+    "deploy:azure",
+    "region:us"
+  ],
+  "downloads": 1186346,
+  "likes": 1188,
+  "modelId": "Qwen/Qwen3-ASR-1.7B",
+  "author": "Qwen",
+  "sha": "7278e1e70fe206f11671096ffdd38061171dd6e5",
+  "lastModified": "2026-01-30T03:00:12.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": null,
+  "config": {
+    "architectures": [
+      "Qwen3ASRForConditionalGeneration"
+    ],
+    "model_type": "qwen3_asr",
+    "processor_config": {
+      "chat_template": "{%- set ns = namespace(system_text=\"\") -%}\n{%- for m in messages -%}\n  {%- if m.role == 'system' -%}\n    {%- if m.content is string -%}\n      {%- set ns.system_text = ns.system_text + m.content -%}\n    {%- else -%}\n      {%- for c in m.content -%}\n        {%- if c.type == 'text' and (c.text is defined) -%}\n          {%- set ns.system_text = ns.system_text + c.text -%}\n        {%- endif -%}\n      {%- endfor -%}\n    {%- endif -%}\n  {%- endif -%}\n{%- endfor -%}\n\n{%- set ns2 = namespace(audio_tokens=\"\") -%}\n{%- for m in messages -%}\n  {%- if m.content is not string -%}\n    {%- for c in m.content -%}\n      {%- if c.type == 'audio' or ('audio' in c) or ('audio_url' in c) -%}\n        {%- set ns2.audio_tokens = ns2.audio_tokens + \"<|audio_start|><|audio_pad|><|audio_end|>\" -%}\n      {%- endif -%}\n    {%- endfor -%}\n  {%- endif -%}\n{%- endfor -%}\n\n{{- '<|im_start|>system\\n' + (ns.system_text if ns.system_text is string else '') + '<|im_end|>\\n' -}}\n{{- '<|im_start|>user\\n' + ns2.audio_tokens + '<|im_end|>\\n' -}}\n{%- if add_generation_prompt -%}\n{{- '<|im_start|>assistant\\n' -}}\n{%- endif -%}"
+    },
+    "tokenizer_config": {
+      "bos_token": null,
+      "eos_token": "<|im_end|>",
+      "pad_token": "<|endoftext|>",
+      "unk_token": null
+    }
+  },
+  "cardData": {
+    "license": "apache-2.0",
+    "pipeline_tag": "automatic-speech-recognition"
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "size": 1519
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "3a67d43f21febda213ff36efdb60ef10019af7f3",
+      "size": 57456
+    },
+    {
+      "rfilename": "chat_template.json",
+      "blobId": "c44736493efd71ec96218cc626904698cdb13235",
+      "size": 1161
+    },
+    {
+      "rfilename": "config.json",
+      "blobId": "2bc16c9d4ca08963715cfb94d879799b9adbd0e9",
+      "size": 6194
+    },
+    {
+      "rfilename": "generation_config.json",
+      "blobId": "7382a4d347c0a865b76bb1b8277f66a5ac312854",
+      "size": 142
+    },
+    {
+      "rfilename": "merges.txt",
+      "blobId": "31349551d90c7606f325fe0f11bbb8bd5fa0d7c7",
+      "size": 1671853
+    },
+    {
+      "rfilename": "model-00001-of-00002.safetensors",
+      "blobId": "1522f6592ff361cdc8b95692bbd8c513d68fc40a",
+      "size": 4220320824,
+      "lfs": {
+        "sha256": "a4cd1f1a04d90b757dc7f7dd26254e69a013b19e80efe590a83c6a3bde8608d6",
+        "size": 4220320824,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model-00002-of-00002.safetensors",
+      "blobId": "5a13bd2988d1368745384b4acb6e8bab73f98a75",
+      "size": 478200688,
+      "lfs": {
+        "sha256": "6e0b9d9e09e2e0238e7ef3cc8a484ab387e91b90f1900bedf88bc92d7929ccfc",
+        "size": 478200688,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "model.safetensors.index.json",
+      "blobId": "1048a4eb4f21fef9aea06d8568a784b2b5595689",
+      "size": 64821
+    },
+    {
+      "rfilename": "preprocessor_config.json",
+      "blobId": "8f7f07346466d5d494ec0d4969d1c3d0190eed72",
+      "size": 330
+    },
+    {
+      "rfilename": "tokenizer_config.json",
+      "blobId": "b93109843922a40c6654c5449d3bf95372267c66",
+      "size": 12487
+    },
+    {
+      "rfilename": "vocab.json",
+      "blobId": "4783fe10ac3adce15ac8f358ef5462739852c569",
+      "size": 2776833
+    }
+  ],
+  "spaces": [
+    "embedl/hfviewer",
+    "fastgpu/vram-and-gpu-cost-calculator",
+    "mrfakename/yue2-3b",
+    "smolagents/hf-realtime-voice",
+    "elmresearchcenter/open_universal_arabic_asr_leaderboard",
+    "Quran-Lab/quranic-asr-leaderboard",
+    "Qwen/Qwen3-ASR",
+    "RyeAI/danish-asr-leaderboard",
+    "EmreAkgul/Turkish-transcription-leaderboard",
+    "treble-technologies/ffasr",
+    "prithivMLmods/Qwen3-TTS-Daggr-UI",
+    "msalhab96/open_universal_arabic_asr_leaderboard_all",
+    "tvosch/Dutch-ASR-Leaderboard",
+    "hlevring/Qwen3-ASR",
+    "Mehdisabori66/yue2-3b",
+    "Zyan11/LocalAI-Amlan-Edition",
+    "Davex256/LocalAI-Amlan-Edition",
+    "build-small-hackathon/VoiceGate",
+    "levibrg/yue2-3b",
+    "shinichi-205/yue2-full-cover",
+    "x1205x62108/yue2-3b",
+    "vagasions/cohere-transcribe-ko-test",
+    "henry99a/WhisperJAV",
+    "FiditeNemini/yue2-3b",
+    "mocomoco-inc/AudioDecisionModel",
+    "ohmp/Ohm-Audio-Studio",
+    "CJJ-on-HF/Qwen3-ASR",
+    "Hokiman/Qwen3-ASR",
+    "hotrung/nhandangtiengnoithanhtext",
+    "laruss5/Qwen3-ASR",
+    "Ava0233/Qwen3-ASR",
+    "devendra123456/Qwen3-ASR_dss",
+    "guychuk/Qwen3-ASR-Hebrew",
+    "runner626/Qwen3-ASR",
+    "TruVlad/flask-qwen3-asr",
+    "chanikul/Qwen3-ASR",
+    "voiceping-ai/qwen3-asr-ja-en-speech-translation",
+    "ZTXRiley/ASR_AGENT_",
+    "sunbv56/Qwen3-ASR-Lyrics-Viet",
+    "watcharabest/esan-translator-api-v2",
+    "AnsenIO/Qwen3-ASR",
+    "homegrownherbalist/Qwen3-ASR",
+    "vagasions/qwen3-asr-korean",
+    "SoMe-AI/Qwen3-ASR",
+    "lmz74108520/Audio-Transcription",
+    "SiliconLanguage/open-asr-model-explorer",
+    "Vyvo/tts-dataset-builder",
+    "jauhjauh1/Qwen3-ASR",
+    "Rikishini/Qwen3-ASR",
+    "ha8012/voiceforge-studio",
+    "kamalsharma0/Voice_Transcript",
+    "Gierry/Qwen3-ASR",
+    "nabavi92/Qwen3-ASR",
+    "hetsheta/MedRAG",
+    "toecm/PurePolyglot",
+    "ghananlpcommunity/unicef-asr-evaluation-app",
+    "pranaysuyash/shopstack",
+    "zuoqi/Qwen3-ASR",
+    "ZFTurbo/open-asr-leaderboard-asr-consilium",
+    "bezzam/open-asr-leaderboard-asr-consilium",
+    "AIBRUH/nobility-v1-dev",
+    "michaelromagne/mega-vs-qwen-asr",
+    "malindhamsara/tamil-asr-qwen3",
+    "sleeper371/qwen3-asr-0.6b",
+    "hugging-apps/cn-multidialect-asr-demo",
+    "Zuzuus/yue2-3b",
+    "nanjoran/yue2-3b",
+    "Rrrvo/yue2-3b",
+    "Mirzoev/yue2-3b",
+    "OctagonInteractive/yue2-3b",
+    "stalesha/yue2-3b",
+    "Dhshshd/Ninqggoai",
+    "EnderDK/yue2-3b",
+    "mcuo/yue2-3b",
+    "TNOT/yue2-3b",
+    "akhaliq/yue2-3b",
+    "hdvd2309/yue2-3b",
+    "alibhji/yue2-3b",
+    "mrfakename/yue2-3b-mount-test",
+    "MrVolts/agents-den",
+    "cabrouxel/yue2-3b",
+    "cabrouxel/yue2-3b-updated",
+    "sakakuto/yue2-3b",
+    "tung776/yue2-3b",
+    "eustlb/asr-models-on-the-hub",
+    "githubtailscaleduplicity342/hf-realtime-voice",
+    "lucianoo6/yue2-3b",
+    "dwdaddsda/yue2-3b",
+    "Xiliourt/yue2-3b",
+    "Rocky28Man/yue2-full-cover",
+    "Chompear2/qwen3-asr-studio",
+    "WAVbot/yue2-3b",
+    "hugging-apps/qwen3-asr-1-7b-ko",
+    "AiQademy/hf-realtime-voice",
+    "kadirnar/closed-source-asr-leaderboard",
+    "kadirnar/smart-turn-arabic-asr-benchmark",
+    "kadirnar/arabic-asr-leaderboard",
+    "kadirnar/test-arabic-asr-benchmark",
+    "oruk/qwen3-asr",
+    "kadirnar/arabic-asr-benchmarks"
+  ],
+  "createdAt": "2026-01-28T03:22:40.000Z",
+  "safetensors": {
+    "parameters": {
+      "BF16": 2349217408
+    },
+    "total": 2349217408
+  },
+  "usedStorage": 4699896190
+}

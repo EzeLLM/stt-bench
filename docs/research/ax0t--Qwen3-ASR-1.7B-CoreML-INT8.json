@@ -1,0 +1,98 @@
+{
+  "_id": "6aba4e311f2e996ba120028c",
+  "id": "ax0t/Qwen3-ASR-1.7B-CoreML-INT8",
+  "private": false,
+  "pipeline_tag": "automatic-speech-recognition",
+  "library_name": "coreml",
+  "tags": [
+    "coreml",
+    "apple-neural-engine",
+    "int8",
+    "audio-encoder",
+    "qwen3-asr",
+    "automatic-speech-recognition",
+    "base_model:Qwen/Qwen3-ASR-1.7B",
+    "base_model:quantized:Qwen/Qwen3-ASR-1.7B",
+    "license:apache-2.0",
+    "region:us"
+  ],
+  "downloads": 0,
+  "likes": 0,
+  "modelId": "ax0t/Qwen3-ASR-1.7B-CoreML-INT8",
+  "author": "ax0t",
+  "sha": "7338b616a17a338b91f86c56b5497b1094fce666",
+  "lastModified": "2026-09-28T11:24:17.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": null,
+  "config": {},
+  "cardData": {
+    "license": "apache-2.0",
+    "base_model": "Qwen/Qwen3-ASR-1.7B",
+    "base_model_relation": "quantized",
+    "library_name": "coreml",
+    "pipeline_tag": "automatic-speech-recognition",
+    "tags": [
+      "coreml",
+      "apple-neural-engine",
+      "int8",
+      "audio-encoder",
+      "qwen3-asr"
+    ]
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "size": 1519
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "811d25cfaf3a4a6ee3b4b22d31463aa53b9902c3",
+      "size": 3539
+    },
+    {
+      "rfilename": "qwen3_asr_audio_tower_int8.mlmodelc/analytics/coremldata.bin",
+      "blobId": "25181501779c6e5ab896dcfdd6bc3383a64a1f89",
+      "size": 243,
+      "lfs": {
+        "sha256": "4c408aab8b14e16f6751d29d57dae91a6c36745a74cc1902559f2c0589a1393f",
+        "size": 243,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "qwen3_asr_audio_tower_int8.mlmodelc/coremldata.bin",
+      "blobId": "b55fb2b5d76ec8f04d5bbb383f9e2606461385f6",
+      "size": 400,
+      "lfs": {
+        "sha256": "a34f6ab0be7f2d8e035ec804e0791c4e27ecf009751affb9fb6e513894694a8b",
+        "size": 400,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "qwen3_asr_audio_tower_int8.mlmodelc/metadata.json",
+      "blobId": "48fd7d70e118f9be3707532679b15f6a0f7f6f2c",
+      "size": 2293
+    },
+    {
+      "rfilename": "qwen3_asr_audio_tower_int8.mlmodelc/model.mil",
+      "blobId": "d1723649d2ee8aa75c0347042fa296fbce79eeb3",
+      "size": 295344
+    },
+    {
+      "rfilename": "qwen3_asr_audio_tower_int8.mlmodelc/weights/weight.bin",
+      "blobId": "0996e1d446d1da42d9f8de13cbe121a5ce5a257d",
+      "size": 318308224,
+      "lfs": {
+        "sha256": "9a46702b35658d59ca4a91331406723cdde86c1b7e3dfb7f1fa93b9cfb2841f1",
+        "size": 318308224,
+        "pointerSize": 134
+      }
+    }
+  ],
+  "spaces": [],
+  "createdAt": "2026-09-28T11:23:29.000Z",
+  "usedStorage": 318308867
+}

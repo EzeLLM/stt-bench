@@ -1,0 +1,134 @@
+{
+  "_id": "69b26d51ff84b2bf804f946e",
+  "id": "aoiandroid/Qwen3-ASR-1.7B-CoreML",
+  "private": false,
+  "pipeline_tag": "automatic-speech-recognition",
+  "library_name": "coremltools",
+  "tags": [
+    "coremltools",
+    "coreml",
+    "asr",
+    "speech-to-text",
+    "qwen3",
+    "on-device",
+    "apple",
+    "macos",
+    "automatic-speech-recognition",
+    "zh",
+    "en",
+    "ja",
+    "ko",
+    "multilingual",
+    "base_model:Qwen/Qwen3-ASR-1.7B",
+    "base_model:quantized:Qwen/Qwen3-ASR-1.7B",
+    "license:apache-2.0",
+    "region:us"
+  ],
+  "downloads": 9,
+  "likes": 1,
+  "modelId": "aoiandroid/Qwen3-ASR-1.7B-CoreML",
+  "author": "aoiandroid",
+  "sha": "3fa66508c26b2668136e3a3d2b1d6ad789e16467",
+  "lastModified": "2026-03-12T07:38:09.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": null,
+  "config": {},
+  "cardData": {
+    "license": "apache-2.0",
+    "base_model": "Qwen/Qwen3-ASR-1.7B",
+    "tags": [
+      "coreml",
+      "asr",
+      "speech-to-text",
+      "qwen3",
+      "on-device",
+      "apple",
+      "macos"
+    ],
+    "language": [
+      "zh",
+      "en",
+      "ja",
+      "ko",
+      "multilingual"
+    ],
+    "pipeline_tag": "automatic-speech-recognition",
+    "library_name": "coremltools"
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "size": 1519
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "cfe2f75b2db853f5129acf4c3087b58666c53e3b",
+      "size": 3906
+    },
+    {
+      "rfilename": "qwen3_asr_decoder_f32_anemll_int8-mixed.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+      "blobId": "2e090468a0f2e39dea39eb9c08daf50a959267b0",
+      "size": 652295,
+      "lfs": {
+        "sha256": "17daab141527f827aaa4f70723f6cd7505a57d0a48489538f9e6b37e74440488",
+        "size": 652295,
+        "pointerSize": 131
+      }
+    },
+    {
+      "rfilename": "qwen3_asr_decoder_f32_anemll_int8-mixed.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+      "blobId": "beaa984088e3e215cfb06c80016fee70b2d45868",
+      "size": 2959247104,
+      "lfs": {
+        "sha256": "7c7d30e1d6dbfb198aef2b5538b639367e2e82bfaba491235b27c124725b4b9f",
+        "size": 2959247104,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "qwen3_asr_decoder_f32_anemll_int8-mixed.mlpackage/Manifest.json",
+      "blobId": "c1dcd1a2ccb73dc2761f24df8a75dd8b995f67b9",
+      "size": 617
+    },
+    {
+      "rfilename": "qwen3_asr_embeddings.bin",
+      "blobId": "f97a11e2447a1e6f77b385c45bc86ab2911c85af",
+      "size": 622329856,
+      "lfs": {
+        "sha256": "1489075dbd08fcd6b87bc69c5feca278014d29fa5693bd4aa61e47c1a3a160d4",
+        "size": 622329856,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "qwen3_asr_encoder_int8.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+      "blobId": "685afca26420fe5aa6637b71e2d70bacc56cbbad",
+      "size": 268054,
+      "lfs": {
+        "sha256": "882f5f24595e505a492d374351770adf89d26bf23e52bf3d2742f01d870004ca",
+        "size": 268054,
+        "pointerSize": 131
+      }
+    },
+    {
+      "rfilename": "qwen3_asr_encoder_int8.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+      "blobId": "8c8e8255d779579bb92750e99fe846e823626f65",
+      "size": 318315520,
+      "lfs": {
+        "sha256": "c0c05f49b0c09d9ebfb56385ee8cd41470ac3a0db4424910aae04bab3f7a5281",
+        "size": 318315520,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "qwen3_asr_encoder_int8.mlpackage/Manifest.json",
+      "blobId": "55a75e222ceca4dcf1202afc34284518aa0ddddd",
+      "size": 617
+    }
+  ],
+  "spaces": [],
+  "createdAt": "2026-03-12T07:37:53.000Z",
+  "usedStorage": 3900812829
+}

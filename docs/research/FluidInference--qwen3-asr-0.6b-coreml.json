@@ -1,0 +1,535 @@
+{
+  "_id": "697ce73a7fe6901d46772def",
+  "id": "FluidInference/qwen3-asr-0.6b-coreml",
+  "private": false,
+  "pipeline_tag": "automatic-speech-recognition",
+  "library_name": "coreml",
+  "tags": [
+    "coreml",
+    "speech-recognition",
+    "asr",
+    "apple",
+    "ios",
+    "macos",
+    "qwen",
+    "audio",
+    "automatic-speech-recognition",
+    "en",
+    "zh",
+    "ja",
+    "ko",
+    "vi",
+    "th",
+    "id",
+    "ms",
+    "hi",
+    "ar",
+    "tr",
+    "ru",
+    "de",
+    "fr",
+    "es",
+    "multilingual",
+    "arxiv:2601.21337",
+    "base_model:Qwen/Qwen3-ASR-0.6B",
+    "base_model:quantized:Qwen/Qwen3-ASR-0.6B",
+    "license:apache-2.0",
+    "region:us"
+  ],
+  "downloads": 104,
+  "likes": 12,
+  "modelId": "FluidInference/qwen3-asr-0.6b-coreml",
+  "author": "FluidInference",
+  "sha": "c081689ec58bcf29c2ef7c474ef78a164bda672b",
+  "lastModified": "2026-03-22T02:02:31.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": null,
+  "config": {},
+  "cardData": {
+    "license": "apache-2.0",
+    "language": [
+      "en",
+      "zh",
+      "ja",
+      "ko",
+      "vi",
+      "th",
+      "id",
+      "ms",
+      "hi",
+      "ar",
+      "tr",
+      "ru",
+      "de",
+      "fr",
+      "es",
+      "multilingual"
+    ],
+    "tags": [
+      "speech-recognition",
+      "asr",
+      "coreml",
+      "apple",
+      "ios",
+      "macos",
+      "qwen",
+      "audio"
+    ],
+    "library_name": "coreml",
+    "pipeline_tag": "automatic-speech-recognition",
+    "base_model": "Qwen/Qwen3-ASR-0.6B"
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "size": 1519
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "081031c73a131325c43a6d388a5a3788ed47b0ba",
+      "size": 2404
+    },
+    {
+      "rfilename": "config.json",
+      "blobId": "9e26dfeeb6e641a33dae4961196235bdb965b21b",
+      "size": 2
+    },
+    {
+      "rfilename": "f32/metadata.json",
+      "blobId": "a0d0977d952fc9e9c9275028a47875e4dd887883",
+      "size": 1802
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder.mlmodelc/analytics/coremldata.bin",
+      "blobId": "3a66e9bac5e0cb8fedb8eeccdeb097650b161b1a",
+      "size": 243,
+      "lfs": {
+        "sha256": "c8a8faea780715de707dc84ec087fa18f608fe14a3f54cbb81c8550f165f5117",
+        "size": 243,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder.mlmodelc/coremldata.bin",
+      "blobId": "f7ea12c0565cf8c30cdbb5825bc15b790f424e97",
+      "size": 443,
+      "lfs": {
+        "sha256": "b5c13346bf7c687fc6131552a5c0007c7a0b50782a82440fed1ff82c67575ae8",
+        "size": 443,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder.mlmodelc/metadata.json",
+      "blobId": "78a5c5e48d2bbf897f287a17eb7c4b79b02eb783",
+      "size": 2059
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder.mlmodelc/model.mil",
+      "blobId": "4f4cdcc9b7d0435a523c99ef4af3f1206cfebd3c",
+      "size": 241578
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder.mlmodelc/weights/weight.bin",
+      "blobId": "08cd16ebd21641e4914deee741cbe7c8b44f2b6a",
+      "size": 372796928,
+      "lfs": {
+        "sha256": "e48b1c016174b3fc76c085585cd8c739cf94eb72587447e38e78e58bf88d5469",
+        "size": 372796928,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+      "blobId": "cb19604148bfc880a944c52dfff24c7275f6f49e",
+      "size": 200798,
+      "lfs": {
+        "sha256": "54bdfd5e41f24f22e0c3f7c0fc099a875fe0480cf3fca85b4aba905b223296e5",
+        "size": 200798,
+        "pointerSize": 131
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+      "blobId": "08cd16ebd21641e4914deee741cbe7c8b44f2b6a",
+      "size": 372796928,
+      "lfs": {
+        "sha256": "e48b1c016174b3fc76c085585cd8c739cf94eb72587447e38e78e58bf88d5469",
+        "size": 372796928,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder.mlpackage/Manifest.json",
+      "blobId": "fade900dc5e27e455c35706bace0597735aee1d1",
+      "size": 617
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder_v2.mlmodelc/analytics/coremldata.bin",
+      "blobId": "f0e5dd32a9cae8ff58835843ee7db1f463938cb2",
+      "size": 243,
+      "lfs": {
+        "sha256": "279247406b9e8e33dc1c256d4e2b5488b9a183daf9a8314172dac9e6f64b449a",
+        "size": 243,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder_v2.mlmodelc/coremldata.bin",
+      "blobId": "8a6d3c4fd9260d3245dcf56cfd52a8b03dd5d287",
+      "size": 385,
+      "lfs": {
+        "sha256": "b319012fd80686a009585fc87f50d7e683bb4da8b5bd14bd506c53e54e5bfb6f",
+        "size": 385,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder_v2.mlmodelc/metadata.json",
+      "blobId": "61d1c8fac4cde8d4232cef55d91245778087a6fc",
+      "size": 2088
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder_v2.mlmodelc/model.mil",
+      "blobId": "8fccc9a0aa40b78b6c5127d09e4cf6d4cfc9bbff",
+      "size": 726626
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder_v2.mlmodelc/weights/weight.bin",
+      "blobId": "e8b7ade75528188a0c71fff5f1de99ab1c94dd04",
+      "size": 372798784,
+      "lfs": {
+        "sha256": "7173c9f195f8fed12354edb5861d041f623ca6dc057dd0f4a3cb436ef38f3141",
+        "size": 372798784,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder_v2.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+      "blobId": "aa64002b0473d343e6fe6b814d1bcbb4163f7c0b",
+      "size": 633397,
+      "lfs": {
+        "sha256": "cfd04675e3ab1133ab4aa2411dadeb4a67c9d5a8eb73e49a5ba99d5e4592119d",
+        "size": 633397,
+        "pointerSize": 131
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder_v2.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+      "blobId": "e8b7ade75528188a0c71fff5f1de99ab1c94dd04",
+      "size": 372798784,
+      "lfs": {
+        "sha256": "7173c9f195f8fed12354edb5861d041f623ca6dc057dd0f4a3cb436ef38f3141",
+        "size": 372798784,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_audio_encoder_v2.mlpackage/Manifest.json",
+      "blobId": "a143d1e00107c88594286e3b36a71787025d2754",
+      "size": 617
+    },
+    {
+      "rfilename": "f32/qwen3_asr_decoder_stateful.mlmodelc/analytics/coremldata.bin",
+      "blobId": "468cd89dca4390ad9a765c73fe92e65ce19f0550",
+      "size": 243,
+      "lfs": {
+        "sha256": "d841f24e1025c7e8a85195697810c8ef1f83028802cd06604dccc5618a30bad5",
+        "size": 243,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_decoder_stateful.mlmodelc/coremldata.bin",
+      "blobId": "08d963e39ed3cb2b9857b39dc04f88bf595e4a18",
+      "size": 2347,
+      "lfs": {
+        "sha256": "27ca2172ef8a63b6fc6c5105e501de16f2e2d4f4a0ddef9dd8b37cc26d5675e3",
+        "size": 2347,
+        "pointerSize": 129
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_decoder_stateful.mlmodelc/metadata.json",
+      "blobId": "a32811fd79ffcea8cb0762dcc814ed1f27890d21",
+      "size": 18785
+    },
+    {
+      "rfilename": "f32/qwen3_asr_decoder_stateful.mlmodelc/model.mil",
+      "blobId": "54b8380e1b964027b03f9a17de1a2243ad8caf99",
+      "size": 905438
+    },
+    {
+      "rfilename": "f32/qwen3_asr_decoder_stateful.mlmodelc/weights/weight.bin",
+      "blobId": "f1f0774ba68c52b27f48a9f1eeedce26864fd89d",
+      "size": 1192436160,
+      "lfs": {
+        "sha256": "c5db920bb9e403b433c8d8dd09ba744f5bb57f8b5dbbc4a07ed37d57e588161d",
+        "size": 1192436160,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_decoder_stateful.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+      "blobId": "7e2b2bcb151b6315f51d0bf0336a1b0b537d2c2d",
+      "size": 894694,
+      "lfs": {
+        "sha256": "fc87fad9df6e295d8eecaaa1b961c6163b4c714a1822c0dc6c92d3eda0ba0a25",
+        "size": 894694,
+        "pointerSize": 131
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_decoder_stateful.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+      "blobId": "f1f0774ba68c52b27f48a9f1eeedce26864fd89d",
+      "size": 1192436160,
+      "lfs": {
+        "sha256": "c5db920bb9e403b433c8d8dd09ba744f5bb57f8b5dbbc4a07ed37d57e588161d",
+        "size": 1192436160,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "f32/qwen3_asr_decoder_stateful.mlpackage/Manifest.json",
+      "blobId": "a7a1713c4a751ada91d779046761d40fe067a88b",
+      "size": 617
+    },
+    {
+      "rfilename": "f32/qwen3_asr_embeddings.bin",
+      "blobId": "fb1aa796666f5882bad037e9d5d2903ea9b1f05f",
+      "size": 311164936,
+      "lfs": {
+        "sha256": "dd1da448e68e0ee14a74f024ebfad964f39c9abcd30ac70632796c7ce76de873",
+        "size": 311164936,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "f32/vocab.json",
+      "blobId": "4783fe10ac3adce15ac8f358ef5462739852c569",
+      "size": 2776833
+    },
+    {
+      "rfilename": "int8/metadata.json",
+      "blobId": "a0d0977d952fc9e9c9275028a47875e4dd887883",
+      "size": 1802
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder.mlmodelc/analytics/coremldata.bin",
+      "blobId": "3a66e9bac5e0cb8fedb8eeccdeb097650b161b1a",
+      "size": 243,
+      "lfs": {
+        "sha256": "c8a8faea780715de707dc84ec087fa18f608fe14a3f54cbb81c8550f165f5117",
+        "size": 243,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder.mlmodelc/coremldata.bin",
+      "blobId": "f7ea12c0565cf8c30cdbb5825bc15b790f424e97",
+      "size": 443,
+      "lfs": {
+        "sha256": "b5c13346bf7c687fc6131552a5c0007c7a0b50782a82440fed1ff82c67575ae8",
+        "size": 443,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder.mlmodelc/metadata.json",
+      "blobId": "78a5c5e48d2bbf897f287a17eb7c4b79b02eb783",
+      "size": 2059
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder.mlmodelc/model.mil",
+      "blobId": "4f4cdcc9b7d0435a523c99ef4af3f1206cfebd3c",
+      "size": 241578
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder.mlmodelc/weights/weight.bin",
+      "blobId": "08cd16ebd21641e4914deee741cbe7c8b44f2b6a",
+      "size": 372796928,
+      "lfs": {
+        "sha256": "e48b1c016174b3fc76c085585cd8c739cf94eb72587447e38e78e58bf88d5469",
+        "size": 372796928,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+      "blobId": "cb19604148bfc880a944c52dfff24c7275f6f49e",
+      "size": 200798,
+      "lfs": {
+        "sha256": "54bdfd5e41f24f22e0c3f7c0fc099a875fe0480cf3fca85b4aba905b223296e5",
+        "size": 200798,
+        "pointerSize": 131
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+      "blobId": "08cd16ebd21641e4914deee741cbe7c8b44f2b6a",
+      "size": 372796928,
+      "lfs": {
+        "sha256": "e48b1c016174b3fc76c085585cd8c739cf94eb72587447e38e78e58bf88d5469",
+        "size": 372796928,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder.mlpackage/Manifest.json",
+      "blobId": "fade900dc5e27e455c35706bace0597735aee1d1",
+      "size": 617
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder_v2.mlmodelc/analytics/coremldata.bin",
+      "blobId": "f0e5dd32a9cae8ff58835843ee7db1f463938cb2",
+      "size": 243,
+      "lfs": {
+        "sha256": "279247406b9e8e33dc1c256d4e2b5488b9a183daf9a8314172dac9e6f64b449a",
+        "size": 243,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder_v2.mlmodelc/coremldata.bin",
+      "blobId": "8a6d3c4fd9260d3245dcf56cfd52a8b03dd5d287",
+      "size": 385,
+      "lfs": {
+        "sha256": "b319012fd80686a009585fc87f50d7e683bb4da8b5bd14bd506c53e54e5bfb6f",
+        "size": 385,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder_v2.mlmodelc/metadata.json",
+      "blobId": "61d1c8fac4cde8d4232cef55d91245778087a6fc",
+      "size": 2088
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder_v2.mlmodelc/model.mil",
+      "blobId": "8fccc9a0aa40b78b6c5127d09e4cf6d4cfc9bbff",
+      "size": 726626
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder_v2.mlmodelc/weights/weight.bin",
+      "blobId": "e8b7ade75528188a0c71fff5f1de99ab1c94dd04",
+      "size": 372798784,
+      "lfs": {
+        "sha256": "7173c9f195f8fed12354edb5861d041f623ca6dc057dd0f4a3cb436ef38f3141",
+        "size": 372798784,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder_v2.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+      "blobId": "aa64002b0473d343e6fe6b814d1bcbb4163f7c0b",
+      "size": 633397,
+      "lfs": {
+        "sha256": "cfd04675e3ab1133ab4aa2411dadeb4a67c9d5a8eb73e49a5ba99d5e4592119d",
+        "size": 633397,
+        "pointerSize": 131
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder_v2.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+      "blobId": "e8b7ade75528188a0c71fff5f1de99ab1c94dd04",
+      "size": 372798784,
+      "lfs": {
+        "sha256": "7173c9f195f8fed12354edb5861d041f623ca6dc057dd0f4a3cb436ef38f3141",
+        "size": 372798784,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_audio_encoder_v2.mlpackage/Manifest.json",
+      "blobId": "a143d1e00107c88594286e3b36a71787025d2754",
+      "size": 617
+    },
+    {
+      "rfilename": "int8/qwen3_asr_decoder_stateful.mlmodelc/analytics/coremldata.bin",
+      "blobId": "6fcd5fc853f2c3fad624e8739f7eb0c93b4d4c51",
+      "size": 243,
+      "lfs": {
+        "sha256": "94f53ae20d39827cba410e845d27deaba7f9f7728d8074a26a1b5f6170405624",
+        "size": 243,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_decoder_stateful.mlmodelc/coremldata.bin",
+      "blobId": "08d963e39ed3cb2b9857b39dc04f88bf595e4a18",
+      "size": 2347,
+      "lfs": {
+        "sha256": "27ca2172ef8a63b6fc6c5105e501de16f2e2d4f4a0ddef9dd8b37cc26d5675e3",
+        "size": 2347,
+        "pointerSize": 129
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_decoder_stateful.mlmodelc/metadata.json",
+      "blobId": "42edc72a3f329fa6975a0fde5c46bf0099dd0315",
+      "size": 18844
+    },
+    {
+      "rfilename": "int8/qwen3_asr_decoder_stateful.mlmodelc/model.mil",
+      "blobId": "2c721163ef6c2a560ec8d017fb9d7bb998800c72",
+      "size": 939591
+    },
+    {
+      "rfilename": "int8/qwen3_asr_decoder_stateful.mlmodelc/weights/weight.bin",
+      "blobId": "c029510b4f590862a76a0beb6869a2f490a6bc85",
+      "size": 597456384,
+      "lfs": {
+        "sha256": "b5bc06697cdcf6ba241feb6f67a0a0b79042c53bc9a5f81a81ae3b8e4d410b69",
+        "size": 597456384,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_decoder_stateful.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+      "blobId": "46cae2a77248692894c43ff21d59b26b0411683d",
+      "size": 921130,
+      "lfs": {
+        "sha256": "0fae7e90c6a961d7219f1581615ccdfe94396bc555d2bc64c67e3d0a82f01725",
+        "size": 921130,
+        "pointerSize": 131
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_decoder_stateful.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+      "blobId": "c029510b4f590862a76a0beb6869a2f490a6bc85",
+      "size": 597456384,
+      "lfs": {
+        "sha256": "b5bc06697cdcf6ba241feb6f67a0a0b79042c53bc9a5f81a81ae3b8e4d410b69",
+        "size": 597456384,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "int8/qwen3_asr_decoder_stateful.mlpackage/Manifest.json",
+      "blobId": "f6d7838190525f581f0795ae58da84c2750e1eb9",
+      "size": 617
+    },
+    {
+      "rfilename": "int8/qwen3_asr_embeddings.bin",
+      "blobId": "fb1aa796666f5882bad037e9d5d2903ea9b1f05f",
+      "size": 311164936,
+      "lfs": {
+        "sha256": "dd1da448e68e0ee14a74f024ebfad964f39c9abcd30ac70632796c7ce76de873",
+        "size": 311164936,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "int8/vocab.json",
+      "blobId": "4783fe10ac3adce15ac8f358ef5462739852c569",
+      "size": 2776833
+    }
+  ],
+  "spaces": [
+    "aoiandroid/green-speech-lm"
+  ],
+  "createdAt": "2026-01-30T17:15:38.000Z",
+  "usedStorage": 4988747819
+}

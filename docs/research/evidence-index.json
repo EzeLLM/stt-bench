@@ -1,0 +1,395 @@
+{
+  "retrieved_on": "2026-10-19",
+  "files": [
+    {
+      "file": "FluidInference--FluidAudio--Documentation--ASR--GettingStarted.md",
+      "sha256": "2bb082b9a167cd57a00518d5ff36b1e524fd3951185cf97f04d6ebe355b264b8",
+      "size_bytes": 5013
+    },
+    {
+      "file": "FluidInference--FluidAudio--Documentation--ASR--ManualModelLoading.md",
+      "sha256": "4aa9584501e43056ff392b6683d65acbb8cfb57bf459421ac6f64233f6a366f2",
+      "size_bytes": 4489
+    },
+    {
+      "file": "FluidInference--FluidAudio--Documentation--ASR--ParakeetUltra.md",
+      "sha256": "592462537c18be07509f38e85c5cfdedab4946abfbbafdb70cabdf144e8f160a",
+      "size_bytes": 3876
+    },
+    {
+      "file": "FluidInference--FluidAudio--Documentation--Models.md",
+      "sha256": "fa5ebc8ce4285e0740468385af25148b043e00fa8599b6d98e76e3eca7d3714b",
+      "size_bytes": 18605
+    },
+    {
+      "file": "FluidInference--FluidAudio--LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357
+    },
+    {
+      "file": "FluidInference--FluidAudio.md",
+      "sha256": "0a31e3c24393dc74650af5d2d9215cab97d44b449add89d644ef63dc74aaf0da",
+      "size_bytes": 48934
+    },
+    {
+      "file": "FluidInference--parakeet-tdt-0.6b-v3-coreml.json",
+      "sha256": "47003aebfab9d6f3c5e8a4b4ab6be2cb6e09b29e19ca2e007470a4999af0a44b",
+      "size_bytes": 24416
+    },
+    {
+      "file": "FluidInference--parakeet-tdt-0.6b-v3-coreml.md",
+      "sha256": "4155baa7d7d6f0ada748e1db3c1b91d18c9f7eb7155efc1abfbbe9d4a6507712",
+      "size_bytes": 4285
+    },
+    {
+      "file": "FluidInference--parakeet-ultra-coreml.json",
+      "sha256": "8edee57325c4b9cdc8e444dc091c126d4a9f65698e4f3fc37031146636e1247d",
+      "size_bytes": 6914
+    },
+    {
+      "file": "FluidInference--parakeet-ultra-coreml.md",
+      "sha256": "9e9e26b6da628a0dc34b9c55f2029e486fc02304ccd7f83825333572ae11c158",
+      "size_bytes": 2235
+    },
+    {
+      "file": "FluidInference--qwen3-asr-0.6b-coreml.json",
+      "sha256": "ffb34cee03cf4f6da612c2b815cff53818c7d3bb3dacfe9722f496300c05cd63",
+      "size_bytes": 16526
+    },
+    {
+      "file": "FluidInference--qwen3-asr-0.6b-coreml.md",
+      "sha256": "00c101eeebff711f0dba878b24fa443ca8d70f7f7a1dbda82895881acb294280",
+      "size_bytes": 2404
+    },
+    {
+      "file": "Qwen--Qwen3-ASR-0.6B--config.json",
+      "sha256": "41602d9ef0c54aba39229aeb475e15c3de15ced1757356fd34e6a3719bbfad7b",
+      "size_bytes": 5752
+    },
+    {
+      "file": "Qwen--Qwen3-ASR-0.6B.json",
+      "sha256": "c96c7fd0a7a452996fc1c0cae37a583259790657a9da4b7bb4cc7734ef07c1bd",
+      "size_bytes": 4907
+    },
+    {
+      "file": "Qwen--Qwen3-ASR-0.6B.md",
+      "sha256": "5058416891bc47a2051557765997e8c42f8eb78a0e33c3e775bd17d4b0ba4d50",
+      "size_bytes": 57456
+    },
+    {
+      "file": "Qwen--Qwen3-ASR-1.7B.json",
+      "sha256": "5c40708d3f08b03d15215acb7cdcd62607616a9f9927267b42fd586e907810d2",
+      "size_bytes": 7624
+    },
+    {
+      "file": "Qwen--Qwen3-ASR-1.7B.md",
+      "sha256": "5058416891bc47a2051557765997e8c42f8eb78a0e33c3e775bd17d4b0ba4d50",
+      "size_bytes": 57456
+    },
+    {
+      "file": "QwenLM--Qwen3-ASR--LICENSE",
+      "sha256": "a44a6081c73ad75f0255bb2bb5cab74ef1829565a895a24e53a4f11290ab7655",
+      "size_bytes": 11343
+    },
+    {
+      "file": "QwenLM--Qwen3-ASR.md",
+      "sha256": "27b5d6e31c3dc10c9b4b86e226f215baacca57bede504994779ad334a67275a0",
+      "size_bytes": 60537
+    },
+    {
+      "file": "SlidingWindowAsrManager.swift.txt",
+      "sha256": "046747f648f9ab14c3f141251359a5836c398036954774183cb73b02d7ad94b0",
+      "size_bytes": 43582
+    },
+    {
+      "file": "TdtDecoderState.swift.txt",
+      "sha256": "5315ffbc07e4b464cbd4a91f2383310eb5643f19e917fd89ee5b3b7e31bf6f33",
+      "size_bytes": 4208
+    },
+    {
+      "file": "UniMocha--Qwen3-ASR-1.7B-CoreML-INT4.json",
+      "sha256": "fef2c0dfbb79b7b5d618527b0288016c54e1ca692dab2122bbcc3dec20dfecfb",
+      "size_bytes": 4525
+    },
+    {
+      "file": "UniMocha--Qwen3-ASR-1.7B-CoreML-INT8.json",
+      "sha256": "02c48b6aed9f0c9bbf482377559158647b6621558315edae27f7013774f76df0",
+      "size_bytes": 4526
+    },
+    {
+      "file": "anyspeech-Package-swift",
+      "sha256": "022f9b67044fc8085564d10c0a564bd9b6f0f01140a889f20d5657b5265ab9b0",
+      "size_bytes": 1211
+    },
+    {
+      "file": "anyspeech-README-md",
+      "sha256": "2a1f4ccfd9dc7fcd00c4269f1cf1de0d87d137805c4908a59568cdead93823f1",
+      "size_bytes": 23225
+    },
+    {
+      "file": "aoiandroid--Qwen3-ASR-1.7B-CoreML.json",
+      "sha256": "d8d2e5016ebb4b8c96daa9041f15446e73a638a88251821619fa155160cd8621",
+      "size_bytes": 3689
+    },
+    {
+      "file": "aoiandroid--Qwen3-ASR-1.7B-CoreML.md",
+      "sha256": "a976f202b1a5d35d1d9f047b975bd1336ceae3bcb2de9cf3084e7575c71d34ff",
+      "size_bytes": 3906
+    },
+    {
+      "file": "apple-power-profiler.html",
+      "sha256": "6cb79ee7b25302f9e559d02851da888fe2a4d5f90e48ab7610fd32170a262916",
+      "size_bytes": 6601
+    },
+    {
+      "file": "apple-power-profiler.json",
+      "sha256": "299213548a845e612c320e82b73c3289f4f7c0306df8491c33775a689d3238c6",
+      "size_bytes": 22495
+    },
+    {
+      "file": "argmaxinc--WhisperKit--LICENSE",
+      "sha256": "b8673adf319f1d6905c5c38cf69513f8857930fb3445566fa9839c6948bb85c4",
+      "size_bytes": 1069
+    },
+    {
+      "file": "argmaxinc--WhisperKit--Sources--WhisperKit--Core--WhisperKit.swift",
+      "sha256": "b891debd15a2ed439d74b75f18f056a5492f50bea5794bca4770111cd06b9ea9",
+      "size_bytes": 57782
+    },
+    {
+      "file": "argmaxinc--WhisperKit.md",
+      "sha256": "e3de47c9730168755bcb38d5c455d79d01311eba774537ba17c8bc73d4557050",
+      "size_bytes": 27981
+    },
+    {
+      "file": "argmaxinc--whisperkit-coreml.json",
+      "sha256": "0d426caffb8cffa09362f0646facdf280b322a904e295da1b07634496432fd93",
+      "size_bytes": 150594
+    },
+    {
+      "file": "argmaxinc--whisperkit-coreml.md",
+      "sha256": "e4ca9ea0f5569c3351fae48370fce30488492f6669d234fe8e34461a8c068c2e",
+      "size_bytes": 571
+    },
+    {
+      "file": "ax0t--Qwen3-ASR-1.7B-CoreML-INT8.json",
+      "sha256": "eb4d0ad2a287fbb78fa5c6ae09295a8f485c31c21877da837bfd777eff5dc864",
+      "size_bytes": 2740
+    },
+    {
+      "file": "ax0t--Qwen3-ASR-1.7B-CoreML-INT8.md",
+      "sha256": "6d8164f6d1057a506c53af5f89850e52e985616c8c6c9286d543bd4618be0cb5",
+      "size_bytes": 3539
+    },
+    {
+      "file": "checkpoint-index.json",
+      "sha256": "483796d4ab9969cb83ff85cee506f4388674d432eafb67caa34272fac3675739",
+      "size_bytes": 6029
+    },
+    {
+      "file": "fluid-asr-manager.txt",
+      "sha256": "5f06567f3656ae76e376bc711398bd6b8067ff6e9bf1dc4a6d9274a95945872e",
+      "size_bytes": 24714
+    },
+    {
+      "file": "fluid-asr-models.txt",
+      "sha256": "3e7457579c8fd65c21ffeb9866b434db19f68cf1a5f9702aaf591550a52dab5f",
+      "size_bytes": 37752
+    },
+    {
+      "file": "fluid-issue-1022.json",
+      "sha256": "2b1b6b32b037544d052797aa70846c22bf93622b6283114cb9c570e770520035",
+      "size_bytes": 4739
+    },
+    {
+      "file": "fluid-issue-760.json",
+      "sha256": "30a5cee4c20172867b6d0eba0070c7ade3ec0958e591c5f3aa0f45798d399f84",
+      "size_bytes": 8131
+    },
+    {
+      "file": "fluid-modelnames.txt",
+      "sha256": "fb5cf712be7e258c98b73e9250f725e0c9092e3e824a3f829623d2e44ecfd3d3",
+      "size_bytes": 88451
+    },
+    {
+      "file": "fluid-tree.json",
+      "sha256": "36473aa448598492fe2c479cc384771aacbcfbbc8aba62a9b3fd6c4db0be41a5",
+      "size_bytes": 337465
+    },
+    {
+      "file": "generate.py.txt",
+      "sha256": "637728154fcf28d5a8124866fc5aea41efd44c32a087b155fe9f231592bc77db",
+      "size_bytes": 14436
+    },
+    {
+      "file": "mattt--qwen3-asr-1.7b-coreml.json",
+      "sha256": "ea963a4fd609b2315a42d7e9e5db753ddbfe3984b34ce7e0d8d0339a0b648b36",
+      "size_bytes": 5171
+    },
+    {
+      "file": "mattt--qwen3-asr-1.7b-coreml.md",
+      "sha256": "da8f87b0c571c40dd72123c8d798b39500a8047c5e3a8c298ad2abce01838a0f",
+      "size_bytes": 6729
+    },
+    {
+      "file": "ml-explore--mlx-swift-examples.md",
+      "sha256": "4da27bf9cb2b3f338851067adf5d521dd4d64c351f3cabc25ae9870ae1b7884b",
+      "size_bytes": 5270
+    },
+    {
+      "file": "ml-explore--mlx-swift.md",
+      "sha256": "b59e8ecfdeceaf7fb525a182cc6e6d9990cd3d501a678224db093de9d763fd98",
+      "size_bytes": 7383
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-0.6B-4bit.json",
+      "sha256": "9466933872558e68e7da99579cd838a7fff0f8b77db6a8fc2cd53b7c011c85fe",
+      "size_bytes": 4224
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-0.6B-4bit.md",
+      "sha256": "4d54132d09a2d3d12410ef13c94d7afcfc936bdca8239a3e6cd0797d6a28dd1c",
+      "size_bytes": 1008
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-0.6B-5bit--config.json",
+      "sha256": "917d365dcee7fb2bb19dee00d840bc25cc4984c758f0007905ceb2e5c4c93666",
+      "size_bytes": 5925
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-0.6B-5bit.json",
+      "sha256": "e922d553a3170c7a2031bbbfa29f8853ce28b3a1a74f5c3c3f5ecde9fd517e2f",
+      "size_bytes": 4221
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-0.6B-5bit.md",
+      "sha256": "5d2e9de51c3962b23700ca4269e9813dedfc98b8d8e3318e821038cf76443805",
+      "size_bytes": 1008
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-0.6B-8bit.json",
+      "sha256": "78445544e8672296f031c73c53dbcb734c10a29747020662907a010da0cc2465",
+      "size_bytes": 4228
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-0.6B-8bit.md",
+      "sha256": "404c9125240861c9c8c23f2452e7140a9664d8393900b42bb0a411dc15abf79c",
+      "size_bytes": 1008
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-1.7B-4bit.json",
+      "sha256": "d11f9ccc0d75f2583f0adece20361a3a755f3bc82804f5f39dfbfd675df5f73b",
+      "size_bytes": 4228
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-1.7B-4bit.md",
+      "sha256": "4d7f16d0a01cd626a3d5291b77249f135eeedd9b1b259d17716cc6b3ef7365cb",
+      "size_bytes": 1008
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-1.7B-5bit--config.json",
+      "sha256": "9f346cb17c44563535b5fc2a8a69d8909c6f16ba244887467f3151fdbd1f9a0d",
+      "size_bytes": 5926
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-1.7B-5bit.json",
+      "sha256": "1a584197c97c0c83db7486f85d5d6652832ed0ae55d4ec70e17760473fd6c732",
+      "size_bytes": 4227
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-1.7B-5bit.md",
+      "sha256": "49a7601497300457e62f0760c955f14cc452adbf324eaee734a3c868639ed78c",
+      "size_bytes": 1008
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-1.7B-8bit.json",
+      "sha256": "bd7897e4aefc45176c2b3092f8c213281134afca7d175d2178e984e1bfc7c524",
+      "size_bytes": 4229
+    },
+    {
+      "file": "mlx-community--Qwen3-ASR-1.7B-8bit.md",
+      "sha256": "b356d4bdfbe7287b06b9b5ad084d9557a24ca98ca277a839beb2e682037b08f6",
+      "size_bytes": 1008
+    },
+    {
+      "file": "mlx-qwen-source.txt",
+      "sha256": "2d9aaadea36945b0c7ada65fec12eaa5ff378628b6d3030aac54b5698a165da1",
+      "size_bytes": 64438
+    },
+    {
+      "file": "moondream--parakeet-ultra.json",
+      "sha256": "f29d1b0a4d5417c63dfbd6f6acc6ee654c022502ea29784e69ded227cdf14085",
+      "size_bytes": 2832
+    },
+    {
+      "file": "moondream--parakeet-ultra.md",
+      "sha256": "d4a8b60c83df734ea0373931ba9548f07bdcbab683d19c7f5777a6a83f0971c8",
+      "size_bytes": 6433
+    },
+    {
+      "file": "nvidia--parakeet-tdt-0.6b-v3.json",
+      "sha256": "0e62d9dfc705d401e6ac43995ef7db1fa847e0eac479d7abcb8c8975fa723dbf",
+      "size_bytes": 71561
+    },
+    {
+      "file": "nvidia--parakeet-tdt-0.6b-v3.md",
+      "sha256": "7a4306a43f395e3a716e77f1d81c03db18a0a355d7b566bb1d6307213ba0302b",
+      "size_bytes": 42888
+    },
+    {
+      "file": "openai--whisper-large-v3-turbo.json",
+      "sha256": "94f64cac237860ed5de74b9478914b7df6ed58e820156a7bbe248cc5bad2f062",
+      "size_bytes": 9705
+    },
+    {
+      "file": "openai--whisper-large-v3-turbo.md",
+      "sha256": "aaef74a740faca90fa1899c4233ebe17f2093b9846d0acf16d9131bf650e9585",
+      "size_bytes": 21196
+    },
+    {
+      "file": "parakeet-coreml-history.json",
+      "sha256": "6dccd56a9347b0c5ac2f55ee953e66ec211a64c926fbefc1e6dfcf8415924c67",
+      "size_bytes": 18588
+    },
+    {
+      "file": "qwen-swift-search.json",
+      "sha256": "a9224db0e3036ad382a30de716c3ca87bcf857f8a25048f0f9fccb391f5d5c9a",
+      "size_bytes": 54308
+    },
+    {
+      "file": "swift-asr-package.txt",
+      "sha256": "f57d861ef68cda62846b8682df3f29c3da5c637f291cadf894c7b4984fd0277b",
+      "size_bytes": 1219
+    },
+    {
+      "file": "swift-asr-readme.txt",
+      "sha256": "acc4904c6e0be034e2744f482af7dba4175d9d61c3401dbc6443ad91723e77ef",
+      "size_bytes": 2681
+    },
+    {
+      "file": "utils.py.txt",
+      "sha256": "c4cc7da99760001c71f3f25fe02fedb1315ec0a67f7dda3d7070fce0b648d140",
+      "size_bytes": 7809
+    },
+    {
+      "file": "weiren119--Qwen3-ASR-1.7B-CoreML.json",
+      "sha256": "be737bd707c38a2eecab0c59e78a6c25db6faf0d8add2e2bed1828a1e3a54f05",
+      "size_bytes": 3687
+    },
+    {
+      "file": "weiren119--Qwen3-ASR-1.7B-CoreML.md",
+      "sha256": "a976f202b1a5d35d1d9f047b975bd1336ceae3bcb2de9cf3084e7575c71d34ff",
+      "size_bytes": 3906
+    },
+    {
+      "file": "whisper-Configurations.swift.txt",
+      "sha256": "0ecbd0c76630a30c0d848106f8fc56eb5c5803fe0c74130380a26478df36c475",
+      "size_bytes": 12686
+    },
+    {
+      "file": "whisper-Models.swift.txt",
+      "sha256": "b54433512070700c0e2ae48357d4cfc00a005f6e2a769f11b518cf4e0d374214",
+      "size_bytes": 65891
+    }
+  ]
+}

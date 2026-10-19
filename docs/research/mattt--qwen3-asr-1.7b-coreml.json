@@ -1,0 +1,220 @@
+{
+  "_id": "6ad5e223b329cace0db01076",
+  "id": "mattt/qwen3-asr-1.7b-coreml",
+  "private": false,
+  "pipeline_tag": "automatic-speech-recognition",
+  "library_name": "coreml",
+  "tags": [
+    "coreml",
+    "speech-recognition",
+    "automatic-speech-recognition",
+    "ar",
+    "cs",
+    "da",
+    "de",
+    "el",
+    "en",
+    "es",
+    "fa",
+    "fi",
+    "fil",
+    "fr",
+    "hi",
+    "hu",
+    "id",
+    "it",
+    "ja",
+    "ko",
+    "mk",
+    "ms",
+    "nl",
+    "pl",
+    "pt",
+    "ro",
+    "ru",
+    "sv",
+    "th",
+    "tr",
+    "vi",
+    "yue",
+    "zh",
+    "base_model:Qwen/Qwen3-ASR-1.7B-hf",
+    "base_model:quantized:Qwen/Qwen3-ASR-1.7B-hf",
+    "license:apache-2.0",
+    "region:us"
+  ],
+  "downloads": 0,
+  "likes": 0,
+  "modelId": "mattt/qwen3-asr-1.7b-coreml",
+  "author": "mattt",
+  "sha": "63bece09d5ec2a8d47cdf3227b8dcf5aa00ecefa",
+  "lastModified": "2026-10-19T09:26:18.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": null,
+  "config": {},
+  "cardData": {
+    "license": "apache-2.0",
+    "license_link": "LICENSE",
+    "base_model": "Qwen/Qwen3-ASR-1.7B-hf",
+    "base_model_relation": "quantized",
+    "pipeline_tag": "automatic-speech-recognition",
+    "library_name": "coreml",
+    "language": [
+      "ar",
+      "cs",
+      "da",
+      "de",
+      "el",
+      "en",
+      "es",
+      "fa",
+      "fi",
+      "fil",
+      "fr",
+      "hi",
+      "hu",
+      "id",
+      "it",
+      "ja",
+      "ko",
+      "mk",
+      "ms",
+      "nl",
+      "pl",
+      "pt",
+      "ro",
+      "ru",
+      "sv",
+      "th",
+      "tr",
+      "vi",
+      "yue",
+      "zh"
+    ],
+    "tags": [
+      "coreml",
+      "speech-recognition"
+    ]
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "size": 1519
+    },
+    {
+      "rfilename": "AudioEncoder.mlmodelc/analytics/coremldata.bin",
+      "blobId": "331ba55f56b81dfb0bb7b0d44d26a37067d6c24f",
+      "size": 243,
+      "lfs": {
+        "sha256": "6757f107f37e8500cd018ca8891bee1b5beb75d5dec424dcbe0ca639b23c7089",
+        "size": 243,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "AudioEncoder.mlmodelc/coremldata.bin",
+      "blobId": "0752420c94e38cdfd5913a818c849e319466ae36",
+      "size": 994,
+      "lfs": {
+        "sha256": "210abd8a0fbd302ac2c5a9458585a7920a18f9b507146a7535c9268f545bf584",
+        "size": 994,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "AudioEncoder.mlmodelc/metadata.json",
+      "blobId": "7ee06ce672f41e46decef8d80d4f5977cba92e14",
+      "size": 2966
+    },
+    {
+      "rfilename": "AudioEncoder.mlmodelc/model.mil",
+      "blobId": "4d801c3582f2cb1682850c4ee0a379a8f6ebb476",
+      "size": 298297
+    },
+    {
+      "rfilename": "AudioEncoder.mlmodelc/weights/weight.bin",
+      "blobId": "97d6fed6af99464ec5d66f636478d49f8cc529b2",
+      "size": 318308864,
+      "lfs": {
+        "sha256": "f95abd3f4b918b7148085e9075796e72307363e483c55636788ce5379aeb1321",
+        "size": 318308864,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "LICENSE",
+      "blobId": "c347eb5ec781d2702623e8e2b5923fa1a766a64d",
+      "size": 11343
+    },
+    {
+      "rfilename": "NOTICE",
+      "blobId": "ef70e1d1f83413ea3e8c1a318a3154f916ea1ceb",
+      "size": 1794
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "41e9eca6422bdf278e40fff7d94caa36375aea10",
+      "size": 6729
+    },
+    {
+      "rfilename": "TextDecoder.mlmodelc/analytics/coremldata.bin",
+      "blobId": "de4c4ca72bea2695d85f46901255fa1868f5d466",
+      "size": 243,
+      "lfs": {
+        "sha256": "be25e14307c59813e495408f79300cef050b0349688e5d35639e81032e8f13a3",
+        "size": 243,
+        "pointerSize": 128
+      }
+    },
+    {
+      "rfilename": "TextDecoder.mlmodelc/coremldata.bin",
+      "blobId": "7b567c1cae38d16fdc6388ebb92aa4691384d57b",
+      "size": 3059,
+      "lfs": {
+        "sha256": "444e4c119fd4c8f1540b9e3a39910c70eb30acbfe6a02992b5499208f03ee2d3",
+        "size": 3059,
+        "pointerSize": 129
+      }
+    },
+    {
+      "rfilename": "TextDecoder.mlmodelc/metadata.json",
+      "blobId": "0f59bd280991aa51abbcfa6a87c8d41a7d13096e",
+      "size": 19820
+    },
+    {
+      "rfilename": "TextDecoder.mlmodelc/model.mil",
+      "blobId": "16a3f5302c03d0ec823165131132cb2f56381c5c",
+      "size": 1027733
+    },
+    {
+      "rfilename": "TextDecoder.mlmodelc/weights/weight.bin",
+      "blobId": "612125284dd8edb665d3e6f7d7198dbb607a7425",
+      "size": 2033890112,
+      "lfs": {
+        "sha256": "ba89fa5ee33b9a377e933212f1f143ce2c2a03c5b556fb76075b32d0b7fc031f",
+        "size": 2033890112,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "conversion.json",
+      "blobId": "776c4e9a757fdf595a0e31577aa06ae7f19abbcb",
+      "size": 5724
+    },
+    {
+      "rfilename": "qwen3_asr_config.json",
+      "blobId": "7670b611420046e991b5b11b32d66ed6a3b7e730",
+      "size": 5462
+    },
+    {
+      "rfilename": "vocab.json",
+      "blobId": "940925067a2b9294d1fb40ba0ae9de292222dbb0",
+      "size": 2283826
+    }
+  ],
+  "spaces": [],
+  "createdAt": "2026-10-19T09:25:55.000Z",
+  "usedStorage": 2352203515
+}
