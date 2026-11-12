@@ -25,7 +25,16 @@ from .experiments import ExperimentCreate, action, create_experiment, list_exper
 from .exports import backup, csv_export, export_experiment
 from .registry import Manifest, candidates, installed, register_manifest
 from .rescoring import rescore, snapshots
-from .reviews import ReviewCreate, ReviewEdit, create_review, edit_review, view_review
+from .reviews import (
+    CandidateEdit,
+    ReviewCreate,
+    ReviewEdit,
+    create_review,
+    edit_review,
+    set_candidate,
+    shortlist,
+    view_review,
+)
 
 
 def create_app(data_root: Path | None = None) -> FastAPI:
@@ -211,6 +220,14 @@ def create_app(data_root: Path | None = None) -> FastAPI:
     @app.get(prefix + "/compare/{experiment_id}")
     def compare(experiment_id: str, language: str = "", tag: str = "", evaluation_id: str | None = None):
         return comparison(db, experiment_id, language, tag, evaluation_id)
+
+    @app.get(prefix + "/experiments/{experiment_id}/shortlist")
+    def experiment_shortlist(experiment_id: str):
+        return shortlist(db, experiment_id)
+
+    @app.put(prefix + "/experiments/{experiment_id}/candidates/{model_id}")
+    def experiment_candidate(experiment_id: str, model_id: str, value: CandidateEdit):
+        return set_candidate(db, experiment_id, model_id, value)
 
     @app.post(prefix + "/reviews", status_code=201)
     def new_review(value: ReviewCreate):

@@ -14,6 +14,7 @@ Date: 2026-10-19. Host: Linux x86-64, Python3.12, Node24, FFmpeg7.1.5; 4 CPU equ
 | Parakeet v3 original / Ultra TDT core | Yes; installed | Transformers 5.20.1, Linux CPU; Ultra explicitly no auxiliary VAD, not Photon parity | Mac/iPhone unrun |
 | NeMo / MLX Audio optional adapters | Source | Primary API inspection; no real invocation | Unrun |
 | Blind ratings/ranking/ties/lock/diff | Yes | Identity hiding, incomplete-set/retry session regression; five-output browser flow | Desktop browser |
+| Ranking workspace: drag/tie ranking, target-text toggle, locked-review shortlist with "advance to phone" flag | Yes | Backend tests; browser drag/tie/reload/shortlist flow on Chrome | Desktop browser; phone handoff (piece 2) not built |
 | Compare/drilldown/paired penalties/exports/rescoring | Yes | API and browser workflows; original score immutability | Portable backend |
 | LAN pairing/device ownership/hash/idempotency | Yes | API tests, wrong-device/hash/duplicate rejection | Real LAN/phone unrun |
 | Swift WhisperKit/FluidAudio engine + CLI | Source | Pinned API/static review only | **Build unrun** |
@@ -31,6 +32,8 @@ See `validation.md` for final recorded commands/outcomes. The opt-in actual mode
 ## Independent review
 
 One read-only fresh-context review identified reference response/CAS, blind-review completeness, native attempt recovery, source-level Swift actor/exclusivity and native cancellation/capability issues. The portable regressions were observed failing and then passing. Native corrections are source changes, not a claim of successful Apple compilation. No push, deployment, publication or physical-device run is inferred from this review.
+
+Mac inference now groups a model's jobs and serves them from one loaded Python runner process (see `methodology.md`, "Mac run order and engine reuse"). Covered by `tests/test_batching.py` with a stub model through the real worker protocol; no real-weight inference or Apple runner was run for this change.
 
 ## Design and plan
 

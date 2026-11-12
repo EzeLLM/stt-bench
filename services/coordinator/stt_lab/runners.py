@@ -8,6 +8,14 @@ import time
 import wave
 from pathlib import Path
 
+# Longest decoder prefix: start-of-transcript, language, task, no-timestamps.
+WHISPER_MAX_PREFIX_TOKENS = 4
+
+
+def whisper_max_new_tokens(requested: int, max_target_positions: int) -> int:
+    """Whisper's decoder positions are shared by the prefix tokens and the generated tokens."""
+    return min(requested, max_target_positions - WHISPER_MAX_PREFIX_TOKENS)
+
 
 def validate_parakeet_loading(loading: dict, model: dict) -> list[str]:
     ignored = set(loading.get("unexpected_keys", []))
@@ -31,14 +39,37 @@ def validate_parakeet_loading(loading: dict, model: dict) -> list[str]:
     return sorted(ignored)
 
 
-def transcriber(request, details: dict | None = None):
-    details = details if details is not None else {}
-    runtime, root, settings = request["model"]["runtime"], request["model_root"], request["settings"]
-    language = request["language"] if settings["language_mode"] == "forced" else None
+QWEN_LANGUAGE_NAMES = {
+    "en": "English",
+    "tr": "Turkish",
+    "ar": "Arabic",
+    "de": "German",
+    "zh": "Chinese",
+    "fr": "French",
+}
+
+
+def item_language(runtime: str, settings: dict, item: dict):
+    """The forced language for one recording, or None for automatic detection."""
+    language = item["language"] if settings["language_mode"] == "forced" else None
     if language and ("+" in language or language == "mixed"):
         raise ValueError(
             "Forced language is undefined for mixed-language recordings; use automatic detection"
         )
+    if runtime == "qwen-transformers" and language and language not in QWEN_LANGUAGE_NAMES:
+        raise ValueError("This forced-language mapping is not implemented; use automatic detection")
+    if runtime == "nemo-parakeet" and language:
+        raise ValueError("NeMo Parakeet adapter supports automatic language/greedy defaults only")
+    if runtime == "parakeet-transformers" and language:
+        raise ValueError("Parakeet TDT reference supports automatic language and greedy decoding only")
+    return language
+
+
+def transcriber(request, details: dict | None = None):
+    """Load a model once. The returned run(item) transcribes one recording with that loaded model."""
+    details = details if details is not None else {}
+    runtime, root, settings = request["model"]["runtime"], request["model_root"], request["settings"]
+    item_language(runtime, settings, request)  # fail before the expensive load
     if runtime == "whisper-transformers":
         import numpy as np
         import torch
@@ -51,14 +82,17 @@ def transcriber(request, details: dict | None = None):
         )
         model.to(device)
 
-        def run():
-            with wave.open(request["audio"], "rb") as wav:
+        def run(item):
+            language = item_language(runtime, settings, item)
+            with wave.open(item["audio"], "rb") as wav:
                 samples = (
                     np.frombuffer(wav.readframes(wav.getnframes()), dtype="<i2").astype(np.float32) / 32768
                 )
             kwargs = {
                 "task": "transcribe",
-                "max_new_tokens": min(settings["max_new_tokens"], 448),
+                "max_new_tokens": whisper_max_new_tokens(
+                    settings["max_new_tokens"], model.config.max_target_positions
+                ),
                 "do_sample": settings["temperature"] > 0,
             }
             if settings["temperature"] > 0:
@@ -90,16 +124,6 @@ def transcriber(request, details: dict | None = None):
 
         if settings["temperature"] != 0:
             raise ValueError("Qwen reference adapter currently supports greedy decoding only")
-        names = {
-            "en": "English",
-            "tr": "Turkish",
-            "ar": "Arabic",
-            "de": "German",
-            "zh": "Chinese",
-            "fr": "French",
-        }
-        if language and language not in names:
-            raise ValueError("This forced-language mapping is not implemented; use automatic detection")
         device = "cuda:0" if torch.cuda.is_available() else "cpu"
         model = Qwen3ASRModel.from_pretrained(
             root,
@@ -109,22 +133,28 @@ def transcriber(request, details: dict | None = None):
             max_new_tokens=settings["max_new_tokens"],
         )
         return (
-            lambda: model.transcribe(audio=request["audio"], language=names.get(language))[0].text,
+            lambda item: (
+                model.transcribe(
+                    audio=item["audio"],
+                    language=QWEN_LANGUAGE_NAMES.get(item_language(runtime, settings, item)),
+                )[0].text
+            ),
             importlib.metadata.version("qwen-asr"),
             device,
         )
     if runtime == "nemo-parakeet":
         import nemo.collections.asr as nemo_asr
 
-        if language or settings["temperature"] != 0:
+        if settings["temperature"] != 0:
             raise ValueError("NeMo Parakeet adapter supports automatic language/greedy defaults only")
         checkpoints = list(Path(root).glob("*.nemo"))
         if len(checkpoints) != 1:
             raise ValueError("NeMo reference requires exactly one original .nemo checkpoint")
         model = nemo_asr.models.ASRModel.restore_from(str(checkpoints[0]))
 
-        def run():
-            result = model.transcribe([request["audio"]], batch_size=1)
+        def run(item):
+            item_language(runtime, settings, item)
+            result = model.transcribe([item["audio"]], batch_size=1)
             item = result[0] if not isinstance(result, tuple) else result[0][0]
             return item if isinstance(item, str) else item.text
 
@@ -134,7 +164,7 @@ def transcriber(request, details: dict | None = None):
         import torch
         from transformers import AutoModelForTDT, AutoProcessor
 
-        if language or settings["temperature"] != 0:
+        if settings["temperature"] != 0:
             raise ValueError("Parakeet TDT reference supports automatic language and greedy decoding only")
         device = "cuda:0" if torch.cuda.is_available() else "cpu"
         model, loading = AutoModelForTDT.from_pretrained(
@@ -149,8 +179,9 @@ def transcriber(request, details: dict | None = None):
         model.to(device).eval()
         processor = AutoProcessor.from_pretrained(root, local_files_only=True)
 
-        def run():
-            with wave.open(request["audio"], "rb") as wav:
+        def run(item):
+            item_language(runtime, settings, item)
+            with wave.open(item["audio"], "rb") as wav:
                 if wav.getframerate() != 16000 or wav.getnchannels() != 1 or wav.getsampwidth() != 2:
                     raise ValueError("Parakeet reference input must be canonical 16 kHz mono PCM16")
                 samples = (
@@ -166,14 +197,13 @@ def transcriber(request, details: dict | None = None):
         import mlx.core as mx
         from mlx_audio.stt.utils import load_model
 
-        mx.random.seed(request.get("seed", 0))
         model = load_model(root)
 
-        def run():
+        def run(item):
             result = model.generate(
-                request["audio"],
+                item["audio"],
                 max_tokens=settings["max_new_tokens"],
-                language=language,
+                language=item_language(runtime, settings, item),
                 temperature=settings["temperature"],
                 stream=False,
                 verbose=False,
@@ -185,48 +215,97 @@ def transcriber(request, details: dict | None = None):
     raise ValueError(f"No Python adapter for {runtime}")
 
 
-def main():
-    request = json.loads(Path(sys.argv[1]).read_text())
+def seed_everything(runtime: str, seed: int):
     import random
 
-    random.seed(request.get("seed", 0))
-    if request["model"]["runtime"] != "mlx-audio-qwen":
+    random.seed(seed)
+    if runtime == "mlx-audio-qwen":
+        import mlx.core as mx
+
+        mx.random.seed(seed)
+    else:
         import torch
 
-        torch.manual_seed(request.get("seed", 0))
-    begin = time.perf_counter()
-    runtime_details = {}
-    run, version, device = transcriber(request, runtime_details)
-    load_seconds = time.perf_counter() - begin
-    for _ in range(request["settings"]["warmups"]):
-        run()
-    begin = time.perf_counter()
-    text = run()
-    inference_seconds = time.perf_counter() - begin
-    if not isinstance(text, str):
-        raise ValueError("Model did not produce a transcription string")
-    result = {
-        "text": text,
-        "load_seconds": load_seconds,
-        "inference_seconds": inference_seconds,
-        "runtime_version": version,
-        "device": device,
-        "platform": platform.platform(),
-        "measurement_kind": "observed",
-        "loading_condition": "new-process-os-cache-uncontrolled",
-        "effective_settings": {
-            **request["settings"],
-            "seed": request.get("seed", 0),
-            "whisper_segmentation": "sequential-long-form"
-            if request["model"]["runtime"] == "whisper-transformers"
-            else None,
-            **runtime_details,
-        },
-        "streaming_mode": "batch",
-        "energy_joules": None,
-        "first_partial_seconds": None,
-    }
-    print("STT_RESULT=" + json.dumps(result, ensure_ascii=False, allow_nan=False))
+        torch.manual_seed(seed)
+
+
+def engine_key(request: dict) -> str:
+    """Requests with equal keys are served by the same loaded model."""
+    return json.dumps(
+        {"model": request["model"], "model_root": request["model_root"], "settings": request["settings"]},
+        sort_keys=True,
+    )
+
+
+class Session:
+    """One loaded model serving consecutive recordings. Only the first result pays, and reports, loading."""
+
+    def __init__(self):
+        self.loaded = None
+        self.key = None
+        self.served = 0
+
+    def handle(self, request: dict) -> dict:
+        runtime, settings = request["model"]["runtime"], request["settings"]
+        seed = request.get("seed", 0)
+        seed_everything(runtime, seed)
+        if self.loaded is None:
+            begin = time.perf_counter()
+            details = {}
+            run, version, device = transcriber(request, details)
+            self.loaded, self.key = (run, version, device, details), engine_key(request)
+            load_seconds, loading_condition = time.perf_counter() - begin, "new-process-os-cache-uncontrolled"
+        elif engine_key(request) != self.key:
+            raise ValueError("Request does not match the loaded model and settings")
+        else:
+            load_seconds, loading_condition = None, "reused-loaded-engine"
+        run, version, device, details = self.loaded
+        for _ in range(settings["warmups"]):
+            run(request)
+        seed_everything(runtime, seed)
+        begin = time.perf_counter()
+        text = run(request)
+        inference_seconds = time.perf_counter() - begin
+        if not isinstance(text, str):
+            raise ValueError("Model did not produce a transcription string")
+        result = {
+            "text": text,
+            "load_seconds": load_seconds,
+            "inference_seconds": inference_seconds,
+            "runtime_version": version,
+            "device": device,
+            "platform": platform.platform(),
+            "measurement_kind": "observed",
+            "loading_condition": loading_condition,
+            "engine_runs_before": self.served,
+            "effective_settings": {
+                **settings,
+                "seed": seed,
+                "whisper_segmentation": "sequential-long-form" if runtime == "whisper-transformers" else None,
+                **details,
+            },
+            "streaming_mode": "batch",
+            "energy_joules": None,
+            "first_partial_seconds": None,
+        }
+        self.served += 1
+        return result
+
+
+def serve(lines):
+    """Emit one STT_RESULT per request line. Any failure ends the process: a failed engine is never reused."""
+    session = Session()
+    for line in lines:
+        if line.strip():
+            result = session.handle(json.loads(line))
+            print("STT_RESULT=" + json.dumps(result, ensure_ascii=False, allow_nan=False), flush=True)
+
+
+def main():
+    if sys.argv[1:] == ["--serve"]:
+        serve(sys.stdin)
+    else:
+        serve([Path(sys.argv[1]).read_text()])
 
 
 if __name__ == "__main__":

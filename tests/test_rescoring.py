@@ -37,4 +37,4 @@ def test_database_migrations_are_repeatable(tmp_path):
     db = Database(tmp_path)
     Database(tmp_path)
     with db.connect() as c:
-        assert c.execute("PRAGMA user_version").fetchone()[0] == 2
+        assert c.execute("PRAGMA user_version").fetchone()[0] == 3

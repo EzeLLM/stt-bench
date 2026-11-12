@@ -122,7 +122,18 @@ def create_experiment(db: Database, value: ExperimentCreate, preview=False):
                 "exclusions": exclusions,
                 "recording_count": len(set(j[1] for j in jobs)),
             }
-        random.Random(value.seed).shuffle(jobs)
+        # A model's jobs run in a row so one loaded engine serves them all. Model order and the order within
+        # each model are seeded, so a run is reproducible but a fixed model never always goes first.
+        rng = random.Random(value.seed)
+        by_model = {}
+        for job in jobs:
+            by_model.setdefault(job[2], []).append(job)
+        model_order = list(by_model)
+        rng.shuffle(model_order)
+        jobs = []
+        for model_id in model_order:
+            rng.shuffle(by_model[model_id])
+            jobs.extend(by_model[model_id])
         conn.execute(
             "INSERT INTO experiments VALUES(?,?,?,?,?,?,?,NULL)",
             (
@@ -200,7 +211,18 @@ def action(db: Database, experiment_id: str, command: str):
         )
 
 
-def claim_job(db: Database, owner: str, lease_seconds=120, device_id=None, installed_model_ids=None):
+REUSED_ENGINE = "reused-loaded-engine"
+
+
+def batch_key(snapshot: dict) -> str:
+    """Jobs with equal keys can be served by one loaded engine: same frozen model and same settings."""
+    return encode({"model": snapshot["model"], "settings": snapshot["settings"]})
+
+
+def claim_job(
+    db: Database, owner: str, lease_seconds=120, device_id=None, installed_model_ids=None, engine_of=None
+):
+    """Claim the next queued job; with engine_of, only a job that can reuse that job's loaded engine."""
     with db.transaction() as conn:
         expired = conn.execute(
             "SELECT id FROM jobs WHERE state='running' AND lease_until<?", (time.time(),)
@@ -219,6 +241,13 @@ def claim_job(db: Database, owner: str, lease_seconds=120, device_id=None, insta
             "SELECT j.* FROM jobs j JOIN experiments e ON e.id=j.experiment_id WHERE e.state='running' AND e.target=? AND j.state='queued' ORDER BY j.rowid",
             (target,),
         ).fetchall()
+        if engine_of is not None:
+            key = batch_key(engine_of["snapshot"])
+            rows = [
+                r
+                for r in rows
+                if r["model_id"] == engine_of["model_id"] and batch_key(json.loads(r["snapshot"])) == key
+            ]
         row = next(
             (r for r in rows if installed_model_ids is None or r["model_id"] in installed_model_ids), None
         )
@@ -259,6 +288,9 @@ def validate_output(value: dict):
         raise ValueError("Runner must return a valid transcription string")
     for field in ("inference_seconds", "load_seconds"):
         number = value.get(field)
+        # A job served by an already loaded engine did not load anything; null says so instead of a fake 0.
+        if field == "load_seconds" and number is None and value.get("loading_condition") == REUSED_ENGINE:
+            continue
         if (
             isinstance(number, bool)
             or not isinstance(number, (float, int))

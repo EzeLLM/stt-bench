@@ -47,7 +47,14 @@ def comparison(db: Database, experiment_id: str, language="", tag="", evaluation
                 "failure_rate": sum(j["state"] == "failed" for j in group) / len(group),
                 "stale_references": sum(j["stale_reference"] for j in primary),
                 "latency": distribution(times),
-                "load_time": distribution([j["output"]["measurements"]["load_seconds"] for j in measured]),
+                # Jobs served by an already loaded engine have no load time; they are left out, not counted as 0.
+                "load_time": distribution(
+                    [
+                        j["output"]["measurements"]["load_seconds"]
+                        for j in measured
+                        if j["output"]["measurements"]["load_seconds"] is not None
+                    ]
+                ),
                 "rtf": distribution(
                     [
                         j["output"]["measurements"]["inference_seconds"]

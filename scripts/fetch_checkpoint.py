@@ -4,11 +4,43 @@
 import argparse
 import fnmatch
 import hashlib
+import http.client
 import json
 import re
+import time
 import urllib.parse
 import urllib.request
 from pathlib import Path
+
+
+def fetch_resumable(url: str, partial: Path, expected_size: int | None, attempts: int = 12) -> None:
+    """Download into `partial`, resuming with HTTP Range after dropped or stalled connections.
+
+    urllib returns empty reads on a dropped connection instead of raising, so a truncated body would
+    otherwise surface only as a checksum mismatch. The byte count is checked against the upstream size here;
+    the SHA-256 or Git blob check in `download` remains the integrity gate.
+    """
+    for attempt in range(attempts):
+        offset = partial.stat().st_size if partial.exists() else 0
+        if expected_size is not None and offset == expected_size:
+            return
+        if expected_size is not None and offset > expected_size:
+            partial.unlink()
+            offset = 0
+        headers = {"Range": f"bytes={offset}-"} if offset else {}
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=120) as response:
+                resumed = response.status == 206
+                with partial.open("ab" if resumed else "wb") as file:
+                    for chunk in iter(lambda: response.read(1024 * 1024), b""):
+                        file.write(chunk)
+        except (OSError, http.client.HTTPException) as error:
+            print(f"Transfer interrupted ({error}); resuming, attempt {attempt + 2}/{attempts}", flush=True)
+            time.sleep(min(60, 5 * 2**attempt))
+            continue
+        if expected_size is None or partial.stat().st_size == expected_size:
+            return
+    raise ValueError(f"Incomplete transfer after {attempts} attempts: {url}")
 
 
 def download(repository: str, revision: str, destination: Path, patterns: list[str]) -> dict:
@@ -54,19 +86,15 @@ def download(repository: str, revision: str, destination: Path, patterns: list[s
         valid, digest = verify(target) if target.exists() else (False, None)
         if not valid:
             temporary = target.with_name(target.name + ".download")
-            try:
-                url = f"https://huggingface.co/{repository}/resolve/{revision}/" + urllib.parse.quote(
-                    relative, safe="/"
-                )
-                with urllib.request.urlopen(url, timeout=600) as response, temporary.open("wb") as file:
-                    for chunk in iter(lambda: response.read(1024 * 1024), b""):
-                        file.write(chunk)
-                valid, digest = verify(temporary)
-                if not valid:
-                    raise ValueError(f"Upstream checksum verification failed: {relative}")
-                temporary.replace(target)
-            finally:
+            url = f"https://huggingface.co/{repository}/resolve/{revision}/" + urllib.parse.quote(
+                relative, safe="/"
+            )
+            fetch_resumable(url, temporary, info.get("size"))
+            valid, digest = verify(temporary)
+            if not valid:
                 temporary.unlink(missing_ok=True)
+                raise ValueError(f"Upstream checksum verification failed: {relative}")
+            temporary.replace(target)
         manifest.append({"path": relative, "sha256": digest})
         print("Verified", relative, flush=True)
     return {

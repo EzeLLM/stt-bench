@@ -101,27 +101,90 @@ test("five-output blind keyboard review, reveal, comparison drilldown and score 
     ],
     { cwd: process.cwd() },
   );
+  // Tall viewport so the drag never needs to scroll mid-gesture.
+  await page.setViewportSize({ width: 1400, height: 3000 });
   await page.goto("/#review");
   await expect(page.locator(".output-row")).toHaveCount(5);
   await expect(page.getByText("ui-fixture-0", { exact: true })).toHaveCount(0);
+  // Target text is hidden by default so it cannot bias the ranking.
+  await expect(page.getByText("FROZEN VERIFIED REFERENCE")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Word diff" })).toHaveCount(0);
+  await expect(page.locator("mark")).toHaveCount(0);
+  await page.getByLabel("Target text").check();
+  await expect(page.getByText("FROZEN VERIFIED REFERENCE")).toBeVisible();
   await page.getByRole("button", { name: "Word diff", exact: true }).click();
   await expect(page.locator("mark").first()).toBeVisible();
   for (let i = 1; i <= 5; i++) {
     await page
-      .getByLabel(`Output ${i} Faithfulness`, { exact: true })
-      .selectOption("4");
+      .getByRole("radio", { name: `Output ${i} Faithfulness 4`, exact: true })
+      .click();
     await page
-      .getByLabel(`Output ${i} Readability`, { exact: true })
-      .selectOption("4");
-    await page
-      .getByLabel(`Output ${i} Rank`, { exact: true })
-      .selectOption(String(i));
+      .getByRole("radio", { name: `Output ${i} Readability 4`, exact: true })
+      .click();
+    await page.getByRole("button", { name: "Add to ranking" }).first().click();
   }
+  const ranking = page.getByLabel("Ranked outputs");
+  const order = () =>
+    ranking.locator(".output-heading strong").allTextContents();
+  expect(await order()).toEqual([
+    "Output 1",
+    "Output 2",
+    "Output 3",
+    "Output 4",
+    "Output 5",
+  ]);
+  // Drag the last card to the top, then tie the old first card with it.
+  await page
+    .getByLabel("Drag Output 5")
+    .dragTo(ranking.locator("article").filter({ hasText: "Output 1" }));
+  expect(await order()).toEqual([
+    "Output 5",
+    "Output 1",
+    "Output 2",
+    "Output 3",
+    "Output 4",
+  ]);
+  await page.getByLabel("Output 1 ties with the card above").check();
+  await expect(
+    ranking.locator("article").filter({ hasText: "Output 1" }),
+  ).toContainText("Rank 1");
+  await expect(
+    ranking.locator("article").filter({ hasText: "Output 2" }),
+  ).toContainText("Rank 3");
+  await expect(page.getByText("Progress saved")).toBeVisible();
+  // Ranking survives a reload because it is saved on the server. Tied cards share a
+  // rank, so their relative order is not saved and they come back sorted by label.
+  await page.reload();
+  await expect(page.locator(".output-row")).toHaveCount(5);
+  expect(await order()).toEqual([
+    "Output 1",
+    "Output 5",
+    "Output 2",
+    "Output 3",
+    "Output 4",
+  ]);
+  await expect(page.getByLabel("Output 5 ties with the card above")).toBeChecked();
   await page.screenshot({ path: "/tmp/stt-lab-review.png", fullPage: true });
   await page.getByRole("button", { name: "Lock & reveal identities" }).click();
   await expect(
     page.getByText("Identities revealed", { exact: true }),
   ).toBeVisible();
+  await page.getByRole("button", { name: "Shortlist", exact: true }).click();
+  await expect(page.locator(".data-table tbody tr")).toHaveCount(5);
+  await page.getByLabel("Advance ui-fixture-0 to phone").check();
+  await page.getByLabel("ui-fixture-0 note").fill("best Arabic");
+  const noteSaved = page.waitForResponse(
+    (r) =>
+      r.url().includes("/candidates/ui-fixture-0") &&
+      (r.request().postData() || "").includes("best Arabic") &&
+      r.ok(),
+  );
+  await page.getByLabel("ui-fixture-0 note").blur();
+  await noteSaved;
+  await page.reload();
+  await page.getByRole("button", { name: "Shortlist", exact: true }).click();
+  await expect(page.getByLabel("Advance ui-fixture-0 to phone")).toBeChecked();
+  await expect(page.getByLabel("ui-fixture-0 note")).toHaveValue("best Arabic");
   await page.getByRole("link", { name: "Compare", exact: true }).click();
   await expect(page.locator(".compare-table tbody tr")).toHaveCount(5);
   await page.locator(".compare-table .model-cell").first().click();

@@ -34,6 +34,17 @@ Initial reference editing does not show predictions. Blind review waits until al
 
 No model names, timing, automated error rates or family colors appear before lock. Human faithfulness, readability, meaning, proper nouns, technical vocabulary, hallucinations, missing words and comments are separate from WER. All outputs need faithfulness, readability and a rank to lock; ties share rank. The owner can inspect their own database, so this prevents accidental UI leakage rather than adversarial access.
 
+## Mac run order and engine reuse
+
+All jobs of one model run in a row, so the Mac worker loads that model once per run of consecutive jobs instead of once per recording. The order is seeded and reproducible: model order is shuffled, then recordings and repetitions are shuffled within each model. Jobs share an engine only if their frozen model manifest and settings are identical, and the worker never mixes models inside one process.
+
+- The first job served by a process reports its measured `load_seconds` (`loading_condition: new-process-os-cache-uncontrolled`). Later jobs report `load_seconds: null` and `loading_condition: reused-loaded-engine`; a null is not a zero, and load-time summaries only count jobs that actually loaded. `engine_runs_before` records how many jobs the process had already served.
+- Each recording is still its own job, attempt, output and evaluation. Inference runs one recording at a time, so per-recording latency and RTF keep their single-file meaning. Cross-recording tensor batching is deliberately not used: it would remove per-recording latency, and Whisper long-form decoding and the Qwen adapter (batch size 1) do not batch across files.
+- Running a model's jobs back to back means thermal state and caches drift between models instead of being spread across them. Latency comparisons between models are therefore less protected against slow drift than with interleaved order; the model order is seeded, so it is recorded and can be varied. Repeat an experiment with a different seed to check that a latency gap is not an order effect.
+- A failure, timeout or cancellation discards the process; the next job starts a fresh one and pays for loading again.
+- Sampled (non-greedy) decoding is seeded before each measured run from the job's own seed, so a transcript no longer depends on its position in the run. Greedy results are unaffected.
+- WhisperKit and FluidAudio runners are Swift executables and still run one process per job; they only get the model-grouped order. Changing them needs a Mac build and device evidence.
+
 ## iPhone timing and conditions
 
 Inference executes inside `NativeEngine`, which has no network/coordinator dependency. Assets and input audio are downloaded and verified before timing. ContinuousClock separates verification, model load, warmup and inference. New-engine loading is labelled with OS caches uncontrolled; reusing a loaded engine is explicit. App restart does not imply truly cold storage or ANE compilation.

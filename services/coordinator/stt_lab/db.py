@@ -79,7 +79,13 @@ class Database:
                     "ALTER TABLE evaluations ADD COLUMN snapshot_id TEXT REFERENCES evaluation_snapshots(id)"
                 )
                 conn.execute("PRAGMA user_version=2")
-            elif version != 2:
+                version = 2
+            if version == 2:
+                conn.execute(
+                    "CREATE TABLE candidates(experiment_id TEXT NOT NULL REFERENCES experiments(id),model_id TEXT NOT NULL,advanced INTEGER NOT NULL,note TEXT NOT NULL DEFAULT '',updated_at TEXT NOT NULL,PRIMARY KEY(experiment_id,model_id))"
+                )
+                conn.execute("PRAGMA user_version=3")
+            elif version != 3:
                 raise RuntimeError(
                     f"Unsupported database version {version}; do not downgrade this application"
                 )

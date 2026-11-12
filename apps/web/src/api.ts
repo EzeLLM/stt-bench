@@ -154,7 +154,7 @@ export type Job = {
     text: string;
     measurements: {
       inference_seconds: number;
-      load_seconds: number;
+      load_seconds: number | null;
       runtime_version: string;
     };
   } | null;
@@ -185,6 +185,16 @@ export type Review = {
     character_alignment: Edit[];
   }[];
   ratings: Record<string, Rating>;
+};
+export type ShortlistModel = {
+  model_id: string;
+  reviews: number;
+  mean_rank: number | null;
+  first_places: number;
+  mean_faithfulness: number | null;
+  mean_readability: number | null;
+  advanced: boolean;
+  note: string;
 };
 export const duration = (seconds: number) =>
   `${Math.floor(seconds / 60)}:${Math.floor(seconds % 60)

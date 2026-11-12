@@ -7,14 +7,16 @@ from stt_lab.registry import register_manifest
 from test_dataset import import_audio
 
 
-def install_model(client, tmp_path, languages=None, runtime="whisper-transformers"):
+def install_model(
+    client, tmp_path, languages=None, runtime="whisper-transformers", model_id="test-model", executable=None
+):
     db = client.app.state.db
     folder = db.root / "models" / "test-checkpoint"
     folder.mkdir(parents=True, exist_ok=True)
     asset = folder / "config.json"
     asset.write_text("{}")
     manifest = {
-        "id": "test-model",
+        "id": model_id,
         "family": "Whisper Turbo",
         "variant": "test fixture",
         "repository": "openai/whisper-large-v3-turbo",
@@ -32,6 +34,8 @@ def install_model(client, tmp_path, languages=None, runtime="whisper-transformer
         "parity": "not-validated",
         "parameter_count": 809000000,
     }
+    if executable:
+        manifest["executable"] = executable
     register_manifest(db, manifest)
     return manifest
 

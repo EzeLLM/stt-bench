@@ -152,3 +152,74 @@ def edit_review(db: Database, review_id: str, edit: ReviewEdit | None = None, lo
             (encode(ratings), int(lock), now(), review_id),
         )
     return view_review(db, review_id)
+
+
+class CandidateEdit(BaseModel):
+    advanced: bool
+    note: str = Field(default="", max_length=2000)
+
+
+def _mean(values):
+    return sum(values) / len(values) if values else None
+
+
+def shortlist(db: Database, experiment_id: str):
+    """Per-model summary of locked human reviews; unlocked reviews never contribute."""
+    with db.connect() as conn:
+        require(conn.execute("SELECT 1 FROM experiments WHERE id=?", (experiment_id,)).fetchone())
+        models = [
+            r[0]
+            for r in conn.execute(
+                "SELECT DISTINCT model_id FROM jobs WHERE experiment_id=? ORDER BY model_id", (experiment_id,)
+            )
+        ]
+        stats = {m: {"ranks": [], "faithfulness": [], "readability": [], "firsts": 0} for m in models}
+        for review in conn.execute("SELECT mapping,ratings FROM reviews WHERE experiment_id=? AND locked=1", (experiment_id,)):
+            ratings = json.loads(review["ratings"])
+            for anonymous_id, output_id in json.loads(review["mapping"]).items():
+                row = conn.execute(
+                    "SELECT j.model_id FROM outputs o JOIN jobs j ON j.id=o.job_id WHERE o.id=?", (output_id,)
+                ).fetchone()
+                rating = ratings.get(anonymous_id)
+                if not row or not rating or row[0] not in stats:
+                    continue
+                entry = stats[row[0]]
+                entry["ranks"].append(rating["rank"])
+                entry["faithfulness"].append(rating["faithfulness"])
+                entry["readability"].append(rating["readability"])
+                entry["firsts"] += rating["rank"] == 1
+        flags = {
+            r["model_id"]: r
+            for r in conn.execute("SELECT model_id,advanced,note FROM candidates WHERE experiment_id=?", (experiment_id,))
+        }
+    return {
+        "models": [
+            {
+                "model_id": m,
+                "reviews": len(s["ranks"]),
+                "mean_rank": _mean(s["ranks"]),
+                "first_places": s["firsts"],
+                "mean_faithfulness": _mean(s["faithfulness"]),
+                "mean_readability": _mean(s["readability"]),
+                "advanced": bool(flags[m]["advanced"]) if m in flags else False,
+                "note": flags[m]["note"] if m in flags else "",
+            }
+            for m, s in stats.items()
+        ]
+    }
+
+
+def set_candidate(db: Database, experiment_id: str, model_id: str, value: CandidateEdit):
+    with db.transaction() as conn:
+        require(
+            conn.execute(
+                "SELECT 1 FROM jobs WHERE experiment_id=? AND model_id=? LIMIT 1", (experiment_id, model_id)
+            ).fetchone(),
+            "Model is not part of this experiment",
+        )
+        conn.execute(
+            "INSERT INTO candidates(experiment_id,model_id,advanced,note,updated_at) VALUES(?,?,?,?,?) "
+            "ON CONFLICT(experiment_id,model_id) DO UPDATE SET advanced=excluded.advanced,note=excluded.note,updated_at=excluded.updated_at",
+            (experiment_id, model_id, int(value.advanced), value.note, now()),
+        )
+    return {"model_id": model_id, "advanced": value.advanced, "note": value.note}
