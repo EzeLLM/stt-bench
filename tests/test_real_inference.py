@@ -30,6 +30,11 @@ def test_additional_original_coordinator_worker_scoring_round_trip(client, name)
     run_reference(client, name + "-manifest.json")
 
 
+@pytest.mark.skipif(os.environ.get("STT_FOURIER_REFERENCE") != "1", reason="Opt-in: requires Fourier weights")
+def test_native_qwen_coordinator_worker_round_trip(client):
+    run_reference(client, "fourier-2b-manifest.json")
+
+
 def run_reference(client, manifest_name):
     repo = Path(__file__).resolve().parents[1]
     manifest = json.loads((repo / "data" / manifest_name).read_text())

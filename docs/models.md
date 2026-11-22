@@ -22,6 +22,31 @@ Qwen uses the official qwen-asr package. Parakeet v3 uses the original current T
 
 All five executed synthetic silence locally. Passing a smoke check means the inference/result/scoring path works; it does not mean speech accuracy, quantization parity or Apple compatibility is validated.
 
+## Optional native Transformers Qwen3-ASR reference
+
+The original Qwen profiles use the publisher's `qwen-asr` package. Native Transformers
+checkpoints have a separate `qwen-native-transformers` adapter. It reads the verified
+local model and chat template, reuses the loaded engine across recordings, and records
+the checkpoint's beam count. The Linux reference uses FP32 and deterministic decoding.
+Clips longer than 30 seconds fail explicitly.
+
+To add [Fourier 2B](https://huggingface.co/oruk/oruk-fourier-2b) for local English
+research, first run `uv sync --frozen`. Reuse the Linux `.venv-parakeet` environment
+if it is installed, or prepare its pinned dependencies without downloading any other models:
+
+```bash
+uv venv --python 3.12 .venv-parakeet --allow-existing
+uv pip install --python .venv-parakeet/bin/python 'torch==2.8.0' 'torchaudio==2.8.0' --index-url https://download.pytorch.org/whl/cpu
+uv pip install --python .venv-parakeet/bin/python -r requirements/parakeet-reference-linux.lock
+uv pip install --python .venv-parakeet/bin/python --no-deps --editable .
+.venv/bin/python scripts/install_additional_references.py --model fourier-2b
+STT_FOURIER_REFERENCE=1 .venv/bin/pytest -q tests/test_real_inference.py -k native_qwen
+```
+
+The explicit install fetches the original weights and processor from Oruk at a pinned
+revision and registers their verified file hashes. Fourier's weights use CC BY-NC 4.0.
+Commercial use and hosted/API serving require a separate license from Oruk.
+
 ## Other checkpoints
 
 Stage selected files without downloading an entire multi-model repository:
