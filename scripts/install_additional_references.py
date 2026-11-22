@@ -51,17 +51,38 @@ SPECS = {
         "Moondream",
     ),
 }
+# The bulk preset contains only the five originally selected references (including
+# Whisper in install.sh). Download an extra research checkpoint only on request.
+BULK_SPECS = tuple(SPECS)
+SPECS["fourier-2b"] = (
+    "oruk/oruk-fourier-2b",
+    "8c2a8871f1304aa2f634da4fb95e24438c4945b9",
+    "Fourier 2B",
+    "qwen-native-transformers",
+    "5.20.1",
+    ".venv-parakeet",
+    "fourier-2b-reference",
+    "Oruk",
+)
 
 
 def install(name):
     repo, revision, family, runtime, version, environment, directory, publisher = SPECS[name]
     destination = ROOT / "data/models" / directory
-    inventory = download(repo, revision, destination, ["*.json", "*.txt", "*.safetensors"])
+    patterns = ["*.json", "*.txt", "*.safetensors"]
+    if runtime == "qwen-native-transformers":
+        patterns.append("chat_template.jinja")
+    inventory = download(repo, revision, destination, patterns)
     assets = [
         {**f, "source_repository": repo, "source_revision": revision, "source_path": f["path"]}
         for f in inventory["files"]
     ]
     issues = []
+    if name == "fourier-2b":
+        issues.append(
+            "Short English recordings up to 30 seconds. CC BY-NC 4.0; commercial use and hosted/API "
+            "serving require a separate Oruk license. Local research reference, no performance parity claim."
+        )
     if name == "parakeet-ultra":
         # Ultra publishes the same v3 tokenizer but not the HF processor descriptors. Their provenance is explicit.
         processor = download(
@@ -95,7 +116,9 @@ def install(name):
         "runtime": runtime,
         "runtime_version": version,
         "root": "models/" + directory,
-        "languages": QWEN_LANGUAGES if name.startswith("qwen") else EUROPEAN,
+        "languages": ["en"]
+        if name == "fourier-2b"
+        else (QWEN_LANGUAGES if name.startswith("qwen") else EUROPEAN),
         "components": [
             {
                 "name": "ASR encoder and decoder",
@@ -126,5 +149,5 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", choices=[*SPECS, "all"], default="all")
     args = parser.parse_args()
-    for name in SPECS if args.model == "all" else [args.model]:
+    for name in BULK_SPECS if args.model == "all" else [args.model]:
         install(name)

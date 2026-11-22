@@ -13,6 +13,7 @@ from .db import Database, encode
 RUNTIMES = Literal[
     "whisper-transformers",
     "qwen-transformers",
+    "qwen-native-transformers",
     "nemo-parakeet",
     "parakeet-transformers",
     "mlx-audio-qwen",

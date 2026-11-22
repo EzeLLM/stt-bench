@@ -142,6 +142,43 @@ def transcriber(request, details: dict | None = None):
             importlib.metadata.version("qwen-asr"),
             device,
         )
+    if runtime == "qwen-native-transformers":
+        import numpy as np
+        import torch
+        from transformers import AutoModelForMultimodalLM, AutoProcessor
+
+        if settings["temperature"] != 0:
+            raise ValueError("Native Qwen3-ASR reference uses deterministic decoding")
+        device = "cuda:0" if torch.cuda.is_available() else "cpu"
+        processor = AutoProcessor.from_pretrained(root, local_files_only=True)
+        model = (
+            AutoModelForMultimodalLM.from_pretrained(root, dtype=torch.float32, local_files_only=True)
+            .to(device)
+            .eval()
+        )
+        details["num_beams"] = model.generation_config.num_beams
+        details["do_sample"] = False
+        details["compute_dtype"] = "float32"
+
+        def run(item):
+            language = item_language(runtime, settings, item)
+            with wave.open(item["audio"], "rb") as wav:
+                if (wav.getframerate(), wav.getnchannels(), wav.getsampwidth()) != (16000, 1, 2):
+                    raise ValueError("Expected a canonical 16 kHz mono PCM16 WAV")
+                if wav.getnframes() > 30 * 16000:
+                    raise ValueError("Native Qwen3-ASR short-form reference accepts clips up to 30 seconds")
+                samples = (
+                    np.frombuffer(wav.readframes(wav.getnframes()), dtype="<i2").astype(np.float32) / 32768
+                )
+            inputs = processor.apply_transcription_request(
+                audio=samples, language=language, return_tensors="pt"
+            ).to(device)
+            with torch.inference_mode():
+                tokens = model.generate(**inputs, max_new_tokens=settings["max_new_tokens"], do_sample=False)
+            generated = tokens[:, inputs["input_ids"].shape[1] :]
+            return processor.decode(generated, return_format="transcription_only")[0]
+
+        return run, importlib.metadata.version("transformers"), device
     if runtime == "nemo-parakeet":
         import nemo.collections.asr as nemo_asr
 
